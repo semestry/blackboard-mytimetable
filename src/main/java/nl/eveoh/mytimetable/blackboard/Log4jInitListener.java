@@ -21,28 +21,27 @@
  * along with this program, see war/license/gpl-3.0.txt. 
  * If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.eveoh.mytimetable.buildingblock;
+package nl.eveoh.mytimetable.blackboard;
+
+import org.apache.log4j.PropertyConfigurator;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.apache.log4j.PropertyConfigurator;
-
 /**
- * Configures log4j by explicitely reading the log4j.properties file (in
- * WEB-INF/classes).
+ * Configures log4j by explicitly reading the log4j.properties file (in WEB-INF/classes).
  * 
  * @author Mike Noordermeer
- * 
  */
 public class Log4jInitListener implements ServletContextListener {
 
+    public static final String CONFIG_PATH = "WEB-INF/classes/log4j.properties";
+
+
+
     public void contextInitialized(ServletContextEvent event) {
-        PropertyConfigurator.configure(event.getServletContext().getRealPath("WEB-INF/classes/log4j.properties"));
+        PropertyConfigurator.configure(event.getServletContext().getRealPath(CONFIG_PATH));
     }
 
-    public void contextDestroyed(ServletContextEvent event) {
-
-    }
-
+    public void contextDestroyed(ServletContextEvent event) {}
 }

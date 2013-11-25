@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	<display-name>mytimetable-building-block</display-name>
+    <display-name>mytimetable-building-block</display-name>
 
-	<listener>
-		<listener-class>nl.eveoh.mytimetable.buildingblock.Log4jInitListener</listener-class>
-     </listener>
+    <listener>
+        <listener-class>nl.eveoh.mytimetable.blackboard.Log4jInitListener</listener-class>
+    </listener>
 
-	<servlet>
-		<servlet-name>configServlet</servlet-name>
-		<servlet-class>nl.eveoh.mytimetable.buildingblock.ConfigService</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>configServlet</servlet-name>
-		<url-pattern>/configService</url-pattern>
-	</servlet-mapping>
+    <servlet>
+        <servlet-name>configServlet</servlet-name>
+        <servlet-class>nl.eveoh.mytimetable.blackboard.service.ConfigService</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>configServlet</servlet-name>
+        <url-pattern>/configService</url-pattern>
+    </servlet-mapping>
 </web-app>

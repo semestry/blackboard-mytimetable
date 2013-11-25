@@ -1,74 +1,58 @@
 <manifest>
     <plugin>
-        <name value="MyTimetable upcoming activities"/>
-        <handle value="mytimetable-upcoming-activities"/>
-        <description
-                value="This plugin provides the upcoming activities in the timetable of a student or staffmember."/>
-        <version value="$version"/>
+        <name value="MyTimetable Upcoming Events" />
+        <handle value="mytimetable-upcoming-events" />
+        <description value="This plugin provides the upcoming events in the timetable of a student or staff member." />
+        <version value="$version" />
         <requires>
-            <bbversion value="8.0"/>
+            <bbversion value="8.0" />
         </requires>
 
         <vendor>
-            <id value="evh"/>
-            <name value="Eveoh"/>
-            <url value="http://www.eveoh.nl/"/>
-            <description value="Eveoh"/>
+            <id value="evh" />
+            <name value="Eveoh" />
+            <url value="http://www.eveoh.nl/" />
+            <description value="Eveoh" />
         </vendor>
 
         <http-actions>
-            <config value="/configService"/>
-            <remove value=""/>
+            <config value="/configService" />
+            <remove value="" />
         </http-actions>
 
         <module-defs>
-            <module-type ext-ref="mytimetable-upcoming-activities-module" title="MyTimetable upcoming activities"
-                         uicreatable="false">
+            <module-type ext-ref="mytimetable-upcoming-events-module" title="MyTimetable upcoming events" uicreatable="false">
                 <jsp>
-                    <view>/upcoming-activities.jsp</view>
+                    <view>/upcoming-events.jsp</view>
                 </jsp>
             </module-type>
 
-            <module type="mytimetable-upcoming-activities-module" useraddable="true"
-                    isdeletable="false" isdetachable="false" title="MyTimetable upcoming activities">
-                <description>Module providing the upcoming activities in the timetable of a student or staffmember
-                </description>
-                <ExtraInfo/>
+            <module type="mytimetable-upcoming-events-module" useraddable="true" isdeletable="false" isdetachable="false" title="MyTimetable Upcoming Events">
+                <description>Module providing the upcoming events in the timetable of a student or staff member</description>
+
+                <ExtraInfo />
+
                 <module-groups>
-                    <module-group id="Everyone"/>
+                    <module-group id="Everyone" />
                 </module-groups>
             </module>
         </module-defs>
 
         <permissions>
-            <permission type="attribute" name="user.authinfo" actions="get"/>
-            <permission type="attribute" name="user.personalinfo"
-                        actions="get"/>
-            <permission type="java.util.logging.LoggingPermission"
-                        name="control" actions=""/>
-            <permission type="java.lang.RuntimePermission" name="db.connection.bb_bb60"
-                        actions="persist"/>
-            <permission type="java.lang.reflect.ReflectPermission"
-                        name="suppressAccessChecks"/>
-            <!-- needed for Hibernate -->
-            <permission type="java.util.PropertyPermission" name="*"
-                        actions="read,write"/>
-            <permission type="java.io.FilePermission" name="&lt;&lt;ALL FILES&gt;&gt;"
-                        actions="read,write,delete"/>
+            <permission type="attribute" name="user.authinfo" actions="get" />
+            <permission type="attribute" name="user.personalinfo" actions="get" />
+            <permission type="java.util.logging.LoggingPermission" name="control" actions="" />
+            <permission type="java.lang.RuntimePermission" name="db.connection.bb_bb60" actions="persist" />
+            <permission type="java.lang.reflect.ReflectPermission" name="suppressAccessChecks" />
+            <permission type="java.util.PropertyPermission" name="*" actions="read,write" />
+            <permission type="java.io.FilePermission" name="&lt;&lt;ALL FILES&gt;&gt;" actions="read,write,delete" />
 
-            <permission type="java.lang.RuntimePermission" name="accessDeclaredMembers"/>
-            <permission type="java.lang.RuntimePermission" name="getProtectionDomain"/>
-            <permission type="java.lang.RuntimePermission" name="setFactory"/>
-
-            <permission type="socket" name="*:80" actions="connect"/>
-            <permission type="socket" name="*:443" actions="connect"/>
+            <permission type="socket" name="*:80" actions="connect" />
+            <permission type="socket" name="*:443" actions="connect" />
 
             <!-- following 2 lines added for blackboard release 8.0.260 JHRE 20080630 -->
-            <permission type="java.lang.RuntimePermission"
-                        name="accessClassInPackage.org.apache.catalina.core" actions="*"/>
-            <permission type="java.lang.RuntimePermission"
-                        name="accessClassInPackage.org.apache.catalina.connector" actions="*"/>
-
+            <permission type="java.lang.RuntimePermission" name="accessClassInPackage.org.apache.catalina.core" actions="*" />
+            <permission type="java.lang.RuntimePermission" name="accessClassInPackage.org.apache.catalina.connector" actions="*" />
         </permissions>
     </plugin>
 </manifest>
