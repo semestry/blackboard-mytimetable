@@ -38,6 +38,7 @@ public class Configuration {
     public static final String APPLICATION_TARGET = "applicationTarget";
     public static final String USERNAME_DOMAIN_PREFIX = "usernameDomainPrefix";
     public static final String NUMBER_OF_EVENTS = "numberOfEvents";
+    public static final String CUSTOM_CSS = "customCss";
 
     /**
      * Key used for communicating with the MyTimetable API.
@@ -86,6 +87,11 @@ public class Configuration {
      */
     private String usernameDomainPrefix;
 
+    /**
+     * Custom CSS to be included in the building block.
+     */
+    private String customCss;
+
 
 
     public Configuration() {}
@@ -109,6 +115,7 @@ public class Configuration {
         applicationTarget = properties.getProperty(APPLICATION_TARGET);
         usernameDomainPrefix = properties.getProperty(USERNAME_DOMAIN_PREFIX);
         numberOfEvents = Integer.parseInt(properties.getProperty(NUMBER_OF_EVENTS));
+        customCss = properties.getProperty(CUSTOM_CSS);
     }
 
     public String getApiKey() {
@@ -167,6 +174,14 @@ public class Configuration {
         this.usernameDomainPrefix = usernameDomainPrefix;
     }
 
+    public String getCustomCss() {
+        return customCss;
+    }
+
+    public void setCustomCss(String customCss) {
+        this.customCss = customCss;
+    }
+
     public Properties toProperties() {
         Properties ret = new Properties();
 
@@ -198,6 +213,10 @@ public class Configuration {
 
         if (usernameDomainPrefix != null) {
             ret.setProperty(USERNAME_DOMAIN_PREFIX, usernameDomainPrefix);
+        }
+
+        if (customCss != null) {
+            ret.setProperty(CUSTOM_CSS, customCss);
         }
 
         return ret;

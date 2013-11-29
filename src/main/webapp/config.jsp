@@ -117,31 +117,27 @@
                 </bbNG:dataElement>
             </bbNG:step>
 
-            <bbNG:step title="Domain configuration" instructions="Configure domain specific settings for the MyTimetable web service.">
+            <bbNG:step title="Domain configuration" instructions="Configure domain specific settings for the MyTimetable API.">
                 <bbNG:dataElement label="Domain prefix for Blackboard username" isRequired="false">
                     <input
                             type="text"
                             name="usernameDomainPrefix"
                             value="${fn:escapeXml(configuration.usernameDomainPrefix)}"
-                            size="25" />
-
-                    <div class="error">${messages.usernameDomainPrefix}</div>
+                            size="100" />
                 </bbNG:dataElement>
             </bbNG:step>
 
-            <%--<bbNG:step title="Custom CSS (not working yet)"--%>
-                       <%--instructions="Configure custom CSS which will be used by the building block.">--%>
+            <bbNG:step title="Customization"
+                       instructions="Customize the appearance of the building block.">
 
-                <%--<bbNG:dataElement label="Domain prefix for Blackboard username" isRequired="false">--%>
-                    <%--<textarea--%>
-                            <%--name="customCss"--%>
-                            <%--value="${fn:escapeXml(configuration.customCss)}"--%>
-                            <%--size="100"--%>
-                            <%--rows="5"></textarea>--%>
-
-                    <%--<div class="error">${messages.customCss}</div>--%>
-                <%--</bbNG:dataElement>--%>
-            <%--</bbNG:step>--%>
+                <bbNG:dataElement label="Override CSS" isRequired="false">
+                    <textarea
+                            name="customCss"
+                            value="${fn:escapeXml(configuration.customCss)}"
+                            cols="80"
+                            rows="15">${fn:escapeXml(configuration.customCss)}</textarea>
+                </bbNG:dataElement>
+            </bbNG:step>
 
             <bbNG:stepSubmit showCancelButton="true" cancelUrl="<%= cancelUrl %>" />
         </bbNG:dataCollection>

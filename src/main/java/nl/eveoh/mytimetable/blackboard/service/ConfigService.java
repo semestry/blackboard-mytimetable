@@ -26,6 +26,7 @@ package nl.eveoh.mytimetable.blackboard.service;
 
 import nl.eveoh.mytimetable.blackboard.ConfigUtil;
 import nl.eveoh.mytimetable.block.model.Configuration;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -73,7 +74,7 @@ public class ConfigService extends HttpServlet {
         Map<String, String> messages = new HashMap<String, String>();
 
         String applicationUri = request.getParameter("applicationUri");
-        if (applicationUri == null || applicationUri.trim().isEmpty()) {
+        if (StringUtils.isBlank(applicationUri)) {
             messages.put("applicationUri", "Please enter a URL.");
         }
 
@@ -81,7 +82,7 @@ public class ConfigService extends HttpServlet {
         Map<String, String> targets = ConfigUtil.getHrefTargets();
         String selectedTarget = targets.get(target);
         if (selectedTarget == null) {
-            messages.put("applicationTarget", "Target should be entered.");
+            messages.put("applicationTarget", "Target should be set.");
         }
 
         int numberOfEvents = -1;
@@ -93,7 +94,7 @@ public class ConfigService extends HttpServlet {
 
         ArrayList<String> apiEndpointUris = new ArrayList<String>();
         String apiEndpointUrisString = request.getParameter("apiEndpointUris");
-        if (apiEndpointUrisString == null || apiEndpointUrisString.trim().isEmpty()) {
+        if (StringUtils.isBlank(apiEndpointUrisString)) {
             messages.put("apiEndpointUris", "Please enter a URL.");
         } else {
             Scanner scanner = new Scanner(apiEndpointUrisString);
@@ -107,7 +108,7 @@ public class ConfigService extends HttpServlet {
         }
 
         String apiKey = request.getParameter("apiKey");
-        if (apiKey == null || apiKey.trim().isEmpty()) {
+        if (StringUtils.isBlank(apiKey)) {
             messages.put("apiKey", "Please enter a the API key.");
         }
 
@@ -115,29 +116,26 @@ public class ConfigService extends HttpServlet {
         boolean sslNameCheck = sslNameCheckString == null || !sslNameCheckString.equals("disable");
 
         String usernameDomainPrefix = request.getParameter("usernameDomainPrefix");
-        if (usernameDomainPrefix.trim().isEmpty()) {
+        if (StringUtils.isBlank(usernameDomainPrefix)) {
             usernameDomainPrefix = null;
+        }
+
+        String customCss = request.getParameter("customCss");
+        if (StringUtils.isBlank(customCss)) {
+            customCss = null;
         }
 
         request.setAttribute("messages", messages);
         request.setAttribute("targets", ConfigUtil.getHrefTargets());
 
         if (messages.isEmpty()) {
-            // save the configuration to the server
-            Configuration configuration = ConfigUtil.loadConfig();
+            // Save the configuration.
 
             try {
-                configuration.setApplicationUri(applicationUri);
-                configuration.setApplicationTarget(selectedTarget);
-                configuration.setNumberOfEvents(numberOfEvents);
-                configuration.setApiEndpointUris(apiEndpointUris);
-                configuration.setApiKey(apiKey);
-                configuration.setSslNameCheck(sslNameCheck);
-                configuration.setUsernameDomainPrefix(usernameDomainPrefix);
-
-                ConfigUtil.saveConfig(configuration);
-            } catch (NullPointerException ex) {
-                log.error("Something went wrong with saving the preferences", ex);
+                saveConfig(applicationUri, selectedTarget, numberOfEvents, apiEndpointUris, apiKey, sslNameCheck,
+                        usernameDomainPrefix, customCss);
+            } catch (ConfigurationPersistenceException e) {
+                log.error("Something went wrong with saving the preferences", e);
 
                 messages.put("error", "Something went wrong with saving the preferences.");
                 request.getRequestDispatcher(CONFIG_JSP).forward(request, response);
@@ -146,6 +144,33 @@ public class ConfigService extends HttpServlet {
             }
         } else {
             request.getRequestDispatcher(CONFIG_JSP).forward(request, response);
+        }
+    }
+
+    private void saveConfig(String applicationUri, String selectedTarget, int numberOfEvents,
+                            ArrayList<String> apiEndpointUris, String apiKey, boolean sslNameCheck,
+                            String usernameDomainPrefix, String customCss) {
+        try {
+            Configuration configuration = ConfigUtil.loadConfig();
+
+            configuration.setApplicationUri(applicationUri);
+            configuration.setApplicationTarget(selectedTarget);
+            configuration.setNumberOfEvents(numberOfEvents);
+            configuration.setApiEndpointUris(apiEndpointUris);
+            configuration.setApiKey(apiKey);
+            configuration.setSslNameCheck(sslNameCheck);
+            configuration.setUsernameDomainPrefix(usernameDomainPrefix);
+            configuration.setCustomCss(customCss);
+
+            ConfigUtil.saveConfig(configuration);
+        } catch (NullPointerException e) {
+            throw new ConfigurationPersistenceException(e);
+        }
+    }
+
+    public static class ConfigurationPersistenceException extends RuntimeException {
+        public ConfigurationPersistenceException(Throwable cause) {
+            super(cause);
         }
     }
 }

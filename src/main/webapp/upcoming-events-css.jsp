@@ -28,28 +28,28 @@ table.eveoh-mytimetable-upcoming-events td {
     border-top: 1px dotted #eee;
 }
 
-table.eveoh-mytimetable-upcoming-events .event {
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
     padding-left: 0;
 }
 
-table.eveoh-mytimetable-upcoming-events .date {
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-date {
     width: 30px;
     min-width: 30px;
 }
 
-table.eveoh-mytimetable-upcoming-events .time {
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-time {
     width: 70px;
     min-width: 70px;
 }
 
-table.eveoh-mytimetable-upcoming-events .location {
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location {
     width: 30%;
     min-width: 30%;
     padding-right: 0;
 }
 
-table.eveoh-mytimetable-upcoming-events .event span,
-table.eveoh-mytimetable-upcoming-events .location span {
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event span,
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location span {
     overflow: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;

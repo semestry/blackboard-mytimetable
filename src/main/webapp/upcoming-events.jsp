@@ -66,6 +66,9 @@
 %>
 
 <%@ include file="upcoming-events-css.jsp" %>
+<style>
+<%= configuration.getCustomCss() %>
+</style>
 
 <fmt:setLocale value="${ctx.locale}" />
 <fmt:setBundle basename="BlackboardMessagesBundle" />
@@ -97,16 +100,16 @@
             <table class="eveoh-mytimetable-upcoming-events" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
-                    <th class="event">
+                    <th class="eveoh-mytimetable-event">
                         <fmt:message key="Header_Description" />
                     </th>
-                    <th class="date">
+                    <th class="eveoh-mytimetable-date">
                         <fmt:message key="Header_Date" />
                     </th>
-                    <th class="time">
+                    <th class="eveoh-mytimetable-time">
                         <fmt:message key="Header_Time" />
                     </th>
-                    <th class="location">
+                    <th class="eveoh-mytimetable-location">
                         <fmt:message key="Header_Location" />
                     </th>
                 </tr>
@@ -114,15 +117,15 @@
                 <tbody>
                 <c:forEach items="${upcomingEvents}" var="event">
                     <tr>
-                        <td class="event">
+                        <td class="eveoh-mytimetable-event">
                             <span><c:out value="${event.activityDescription}" /></span></td>
-                        <td class="date">
+                        <td class="eveoh-mytimetable-date">
                             <fmt:formatDate pattern="dd-MM" value="${event.startDate}" />
                         </td>
-                        <td class="time">
+                        <td class="eveoh-mytimetable-time">
                             <fmt:formatDate pattern="HH:mm" value="${event.startDate}" /> - <fmt:formatDate pattern="HH:mm" value="${event.endDate}" />
                         </td>
-                        <td class="location">
+                        <td class="eveoh-mytimetable-location">
                             <c:choose>
                                 <c:when test="${empty event.locations}">
                                     <fmt:message key="UnknownLocation" />
