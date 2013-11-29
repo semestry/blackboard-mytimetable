@@ -12,13 +12,16 @@ def getGitRevision = {
     'unknown'
 }
 
-ext.customer = null
-
 group = 'nl.eveoh.mytimetable'
 version = '2.0.' + getGitRevision()
 
-sourceCompatibility = 1.5
-targetCompatibility = 1.5
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+ext.customer = null
+
+ext.jacksonVersion = '2.2.3'
+ext.blackboardVersion = '9.1.120113.0'
 
 war {
     // Replace version in Blackboard Manifest
@@ -46,14 +49,7 @@ repositories {
     mavenCentral()
     mavenLocal()
     maven {
-        url "http://www.eveoh.nl/files/maven2"
-    }
-    maven {
-        credentials {
-            username eveohMavenUser
-            password eveohMavenPassword
-        }
-        url "https://maven.eveoh.nl"
+        url "https://maven.blackboard.com/content/repositories/releases"
     }
 }
 
@@ -66,14 +62,14 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.1'
     compile 'org.apache.httpcomponents:httpclient:4.3.1'
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.2.3'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.2.3'
-    compile 'com.fasterxml.jackson.core:jackson-annotations:2.2.3'
+    compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
 
     // Blackboard provided libs
-    providedCompile 'nl.eveoh.blackboard:bb-cms-admin:9.1.452.0'
-    providedCompile 'nl.eveoh.blackboard:bb-platform:9.1.452.0'
-    providedCompile 'nl.eveoh.blackboard:bb-taglibs:9.1.452.0'
+    providedCompile "blackboard.platform:bb-cms-admin:${blackboardVersion}"
+    providedCompile "blackboard.platform:bb-platform:${blackboardVersion}"
+    providedCompile "blackboard.platform:bb-taglibs:${blackboardVersion}"
 
     providedCompile 'javax.servlet:jstl:1.2'
 }
