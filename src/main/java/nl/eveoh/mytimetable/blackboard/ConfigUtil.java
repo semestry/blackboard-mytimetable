@@ -28,7 +28,8 @@ import blackboard.persist.navigation.NavigationItemDbLoader;
 import blackboard.platform.plugin.PlugInConfig;
 import blackboard.platform.plugin.PlugInUtil;
 import blackboard.platform.servlet.InlineReceiptUtil;
-import nl.eveoh.mytimetable.block.model.Configuration;
+import nl.eveoh.mytimetable.apiclient.configuration.Configuration;
+import nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -107,7 +108,7 @@ public abstract class ConfigUtil {
      * 
      * @return                  Properties file containing the configuration.
      */
-    public static Configuration loadConfig() {
+    public static WidgetConfiguration loadConfig() {
         BufferedReader in;
         Properties properties = new Properties();
 
@@ -117,7 +118,7 @@ public abstract class ConfigUtil {
             in = new BufferedReader(new FileReader(pc.getConfigDirectory().getAbsolutePath() + "/" + CONFIG_FILE));
         } catch (Exception ex) {
             log.error("Could not open plugin configuration for saving", ex);
-            return new Configuration();
+            return new WidgetConfiguration();
         }
 
         try {
@@ -132,7 +133,7 @@ public abstract class ConfigUtil {
             }
         }
 
-        return new Configuration(properties);
+        return new WidgetConfiguration(properties);
     }
 
     /**

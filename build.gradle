@@ -12,7 +12,7 @@ def getGitRevision = {
     'unknown'
 }
 
-group = 'nl.eveoh.mytimetable'
+group = 'nl.eveoh.mytimetable.blackboard'
 version = '2.0.' + getGitRevision()
 
 sourceCompatibility = 1.6
@@ -47,9 +47,11 @@ war {
 
 repositories {
     mavenCentral()
-    mavenLocal()
     maven {
         url "https://maven.blackboard.com/content/repositories/releases"
+    }
+    maven {
+        url "http://dl.eveoh.nl/maven2"
     }
 }
 
@@ -60,7 +62,8 @@ dependencies {
     compile 'org.slf4j:slf4j-log4j12:1.6.4'
 
     compile 'org.apache.commons:commons-lang3:3.1'
-    compile 'org.apache.httpcomponents:httpclient:4.3.1'
+
+    compile 'nl.eveoh.mytimetable.apiclient:mytimetable-api-client:1.0.3'
 
     compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"

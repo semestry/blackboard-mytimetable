@@ -2,10 +2,10 @@
 <%@page import="
     blackboard.data.user.User,
     nl.eveoh.mytimetable.blackboard.ConfigUtil,
-    nl.eveoh.mytimetable.block.model.Configuration,
-    nl.eveoh.mytimetable.block.model.Event,
-    nl.eveoh.mytimetable.block.service.MyTimetableService,
-    nl.eveoh.mytimetable.block.service.MyTimetableServiceImpl,
+    nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration,
+    nl.eveoh.mytimetable.apiclient.model.Event,
+    nl.eveoh.mytimetable.apiclient.service.MyTimetableService,
+    nl.eveoh.mytimetable.apiclient.service.MyTimetableServiceImpl,
     org.slf4j.Logger,
     org.slf4j.LoggerFactory,
     java.io.PrintWriter,
@@ -15,7 +15,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="/bbData" prefix="bbData" %>
-<%@ taglib uri="/bbNG" prefix="bbNG"%>
 
 <bbData:context id="ctx">
 
@@ -23,7 +22,7 @@
     Logger log = LoggerFactory.getLogger("upcoming-events.jsp");
 
     // load Configuration
-    Configuration configuration = ConfigUtil.loadConfig();
+    WidgetConfiguration configuration = ConfigUtil.loadConfig();
     pageContext.setAttribute("configuration", configuration);
 
     // get current username
@@ -44,10 +43,10 @@
     if (isLoggedIn) {
         log.debug("Logged in. Fetching upcoming events");
 
-        MyTimetableService service = new MyTimetableServiceImpl();
+        MyTimetableService service = new MyTimetableServiceImpl(configuration);
 
         try {
-            upcomingEvents = service.getEvents(username, configuration);
+            upcomingEvents = service.getUpcomingEvents(username);
         } catch (Exception e) {
             ex = e;
             log.error("Unable to fetch events.", e);

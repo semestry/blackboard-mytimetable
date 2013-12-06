@@ -24,8 +24,9 @@
 
 package nl.eveoh.mytimetable.blackboard.service;
 
+import nl.eveoh.mytimetable.apiclient.service.MyTimetableServiceImpl;
 import nl.eveoh.mytimetable.blackboard.ConfigUtil;
-import nl.eveoh.mytimetable.block.model.Configuration;
+import nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +51,7 @@ import java.util.Scanner;
  */
 public class ConfigService extends HttpServlet {
 
-    private static final long serialVersionUID = 8415424352054201386L;
+    private static final long serialVersionUID = 8415424352054201389L;
 
     private static final Logger log = LoggerFactory.getLogger(ConfigService.class);
 
@@ -112,8 +113,29 @@ public class ConfigService extends HttpServlet {
             messages.put("apiKey", "Please enter a the API key.");
         }
 
-        String sslNameCheckString = request.getParameter("sslNameCheck");
-        boolean sslNameCheck = sslNameCheckString == null || !sslNameCheckString.equals("disable");
+        String apiSslCnCheckString = request.getParameter("apiSslCnCheck");
+        boolean apiSslCnCheck = apiSslCnCheckString == null || !apiSslCnCheckString.equals("disable");
+
+        int apiConnectTimeout = -1;
+        try {
+            apiConnectTimeout = Integer.parseInt(request.getParameter("apiConnectTimeout"));
+        } catch (NumberFormatException ex) {
+            messages.put("apiConnectTimeout", "Please enter a valid number.");
+        }
+
+        int apiSocketTimeout = -1;
+        try {
+            apiSocketTimeout = Integer.parseInt(request.getParameter("apiSocketTimeout"));
+        } catch (NumberFormatException ex) {
+            messages.put("apiSocketTimeout", "Please enter a valid number.");
+        }
+
+        int apiMaxConnections = -1;
+        try {
+            apiMaxConnections = Integer.parseInt(request.getParameter("apiMaxConnections"));
+        } catch (NumberFormatException ex) {
+            messages.put("apiMaxConnections", "Please enter a valid number.");
+        }
 
         String usernameDomainPrefix = request.getParameter("usernameDomainPrefix");
         if (StringUtils.isBlank(usernameDomainPrefix)) {
@@ -132,8 +154,8 @@ public class ConfigService extends HttpServlet {
             // Save the configuration.
 
             try {
-                saveConfig(applicationUri, selectedTarget, numberOfEvents, apiEndpointUris, apiKey, sslNameCheck,
-                        usernameDomainPrefix, customCss);
+                saveConfig(applicationUri, selectedTarget, numberOfEvents, apiEndpointUris, apiKey, apiSslCnCheck,
+                        apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, customCss);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -148,21 +170,27 @@ public class ConfigService extends HttpServlet {
     }
 
     private void saveConfig(String applicationUri, String selectedTarget, int numberOfEvents,
-                            ArrayList<String> apiEndpointUris, String apiKey, boolean sslNameCheck,
+                            ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
+                            int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
                             String usernameDomainPrefix, String customCss) {
         try {
-            Configuration configuration = ConfigUtil.loadConfig();
+            WidgetConfiguration configuration = ConfigUtil.loadConfig();
 
             configuration.setApplicationUri(applicationUri);
             configuration.setApplicationTarget(selectedTarget);
             configuration.setNumberOfEvents(numberOfEvents);
             configuration.setApiEndpointUris(apiEndpointUris);
             configuration.setApiKey(apiKey);
-            configuration.setSslNameCheck(sslNameCheck);
+            configuration.setApiSslCnCheck(apiSslCnCheck);
+            configuration.setApiConnectTimeout(apiConnectTimeout);
+            configuration.setApiSocketTimeout(apiSocketTimeout);
+            configuration.setApiMaxConnections(apiMaxConnections);
             configuration.setUsernameDomainPrefix(usernameDomainPrefix);
             configuration.setCustomCss(customCss);
 
             ConfigUtil.saveConfig(configuration);
+
+            MyTimetableServiceImpl.reinitializeHttpClient(configuration);
         } catch (NullPointerException e) {
             throw new ConfigurationPersistenceException(e);
         }
