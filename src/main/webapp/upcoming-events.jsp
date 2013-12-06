@@ -1,11 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page import="
     blackboard.data.user.User,
-    nl.eveoh.mytimetable.blackboard.ConfigUtil,
     nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration,
     nl.eveoh.mytimetable.apiclient.model.Event,
-    nl.eveoh.mytimetable.apiclient.service.MyTimetableService,
     nl.eveoh.mytimetable.apiclient.service.MyTimetableServiceImpl,
+    nl.eveoh.mytimetable.blackboard.MyTimetableServiceContainer,
     org.slf4j.Logger,
     org.slf4j.LoggerFactory,
     java.io.PrintWriter,
@@ -21,8 +20,9 @@
 <%
     Logger log = LoggerFactory.getLogger("upcoming-events.jsp");
 
-    // load Configuration
-    WidgetConfiguration configuration = ConfigUtil.loadConfig();
+    MyTimetableServiceImpl service = MyTimetableServiceContainer.getService();
+
+    WidgetConfiguration configuration = (WidgetConfiguration) service.getConfiguration();
     pageContext.setAttribute("configuration", configuration);
 
     // get current username
@@ -42,8 +42,6 @@
     boolean connectionProblem = false;
     if (isLoggedIn) {
         log.debug("Logged in. Fetching upcoming events");
-
-        MyTimetableService service = new MyTimetableServiceImpl(configuration);
 
         try {
             upcomingEvents = service.getUpcomingEvents(username);

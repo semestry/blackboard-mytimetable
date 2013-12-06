@@ -24,9 +24,10 @@
 
 package nl.eveoh.mytimetable.blackboard.service;
 
+import nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration;
 import nl.eveoh.mytimetable.apiclient.service.MyTimetableServiceImpl;
 import nl.eveoh.mytimetable.blackboard.ConfigUtil;
-import nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration;
+import nl.eveoh.mytimetable.blackboard.MyTimetableServiceContainer;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -190,7 +191,8 @@ public class ConfigService extends HttpServlet {
 
             ConfigUtil.saveConfig(configuration);
 
-            MyTimetableServiceImpl.reinitializeHttpClient(configuration);
+            MyTimetableServiceImpl service = MyTimetableServiceContainer.getService();
+            service.onConfigurationChanged(configuration);
         } catch (NullPointerException e) {
             throw new ConfigurationPersistenceException(e);
         }
