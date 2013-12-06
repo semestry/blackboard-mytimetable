@@ -11,8 +11,18 @@
         <servlet-class>nl.eveoh.mytimetable.blackboard.service.ConfigService</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>enrollmentsServlet</servlet-name>
+        <servlet-class>nl.eveoh.mytimetable.blackboard.service.EnrollmentsService</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>configServlet</servlet-name>
         <url-pattern>/configService</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>enrollmentsServlet</servlet-name>
+        <url-pattern>/enrollmentsForUser</url-pattern>
     </servlet-mapping>
 </web-app>
