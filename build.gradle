@@ -1,24 +1,10 @@
 apply plugin: 'war'
 
-def getGitRevision = {
-    try {
-        def git = 'git rev-parse --short HEAD'.execute()
-        def status = git.waitFor()
-        assert status == 0, "${git.err.text}"
-        return git.text.trim()
-    }
-    catch (AssertionError a) {}
-    catch (Exception e) {}
-    'unknown'
-}
-
 group = 'nl.eveoh.mytimetable.blackboard'
-version = '2.0.' + getGitRevision()
+version = '2.0.0'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
-
-ext.customer = null
 
 ext.jacksonVersion = '2.2.3'
 ext.blackboardVersion = '9.1.120113.0'
@@ -34,24 +20,18 @@ war {
     manifest {
         attributes(
                 'Implementation-Title': 'MyTimetable Blackboard building block',
-                'Implementation-Version': (!customer) ? version : "${version}-${customer}",
+                'Implementation-Version': version,
                 'Implementation-Vendor': 'Eveoh',
                 'Provider': 'Gradle'
         )
     }
 
     manifest.from(jar.manifest)
-
-    classifier = customer
 }
 
 repositories {
-    mavenCentral()
     maven {
-        url "https://maven.blackboard.com/content/repositories/releases"
-    }
-    maven {
-        url "http://dl.eveoh.nl/maven2"
+        url "https://maven.eveoh.nl/content/groups/public"
     }
 }
 
