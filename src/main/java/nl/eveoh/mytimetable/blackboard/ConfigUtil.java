@@ -81,7 +81,7 @@ public abstract class ConfigUtil {
         Properties properties = configuration.toProperties();
 
         try {
-            PlugInConfig pc = new PlugInConfig("evh", "mytimetable-upcoming-events");
+            PlugInConfig pc = new PlugInConfig("evh", "mytimetable-b2");
 
             out = new BufferedWriter(new FileWriter(pc.getConfigDirectory().getAbsolutePath() + "/" + CONFIG_FILE));
         } catch (Exception ex) {
@@ -113,7 +113,7 @@ public abstract class ConfigUtil {
         Properties properties = new Properties();
 
         try {
-            PlugInConfig pc = new PlugInConfig("evh", "mytimetable-upcoming-events");
+            PlugInConfig pc = new PlugInConfig("evh", "mytimetable-b2");
 
             in = new BufferedReader(new FileReader(pc.getConfigDirectory().getAbsolutePath() + "/" + CONFIG_FILE));
         } catch (Exception ex) {

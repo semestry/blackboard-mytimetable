@@ -1,11 +1,11 @@
 <manifest>
     <plugin>
         <name value="MyTimetable Upcoming Events" />
-        <handle value="mytimetable-upcoming-events" />
+        <handle value="mytimetable-b2" />
         <description value="This plugin provides the upcoming events in the timetable of a student or staff member." />
         <version value="$version" />
         <requires>
-            <bbversion value="8.0" />
+            <bbversion value="9.0" />
         </requires>
 
         <vendor>
@@ -21,13 +21,13 @@
         </http-actions>
 
         <module-defs>
-            <module-type ext-ref="mytimetable-upcoming-events-module" title="MyTimetable upcoming events" uicreatable="false">
+            <module-type ext-ref="mytimetable-b2-module" title="MyTimetable upcoming events" uicreatable="false">
                 <jsp>
                     <view>/upcoming-events.jsp</view>
                 </jsp>
             </module-type>
 
-            <module type="mytimetable-upcoming-events-module" useraddable="true" isdeletable="false" isdetachable="false" title="MyTimetable Upcoming Events">
+            <module type="mytimetable-b2-module" useraddable="true" isdeletable="false" isdetachable="false" title="MyTimetable Upcoming Events">
                 <description>Module providing the upcoming events in the timetable of a student or staff member</description>
 
                 <ExtraInfo />
