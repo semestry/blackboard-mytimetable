@@ -22,29 +22,29 @@ Configuration
 
 Various settings can be found under the building block settings page:
 
-* MyTimetable URL: URL to your MyTimetable installation, used in the interface to link to the full timetable. Add `?requireLogin=true` to
+* __MyTimetable URL__: URL to your MyTimetable installation, used in the interface to link to the full timetable. Add `?requireLogin=true` to
 automatically trigger authentication.
-* MyTimetable link target: defines if the building block is loaded in a new window (`_blank`) or in the current window (`_top`).
-* Number of events to show: number of upcoming events shown in the building block module.
+* __MyTimetable link target__: defines if the building block is loaded in a new window (`_blank`) or in the current window (`_top`).
+* __Number of events to show__: number of upcoming events shown in the building block module.
 
 
-* MyTimetable API URL: URL to your MyTimetable 2.3+ API. Needs to include the `/api/v0/` part. Multiple URLs can be specified
+* __MyTimetable API URL__: URL to your MyTimetable 2.3+ API. Needs to include the `/api/v0/` part. Multiple URLs can be specified
 on separate lines, to support failover in the case of issues with one of the application servers.
-* MyTimetable API key: a MyTimetable API key, as included in the `api_tokens` table. The key needs to have 'elevated'
+* __MyTimetable API key__: a MyTimetable API key, as included in the `api_tokens` table. The key needs to have 'elevated'
 permissions (`is_elevated` should be True)
-* Disable SSL certificate CN verification: Tick this box to disable the strict hostname checks and allow any
+* __Disable SSL certificate CN verification__: Tick this box to disable the strict hostname checks and allow any
 hostname in the certificate. Useful when the connection is made using an internal hostname. The SSL certificate
 still has to be valid.
-* Timeout settings: define various timeouts.
-* Maximum number of concurrent API connections: Maximum number of concurrent connections made to the API. Do not
+* __Timeout settings__: define various timeouts.
+* __Maximum number of concurrent API connections__: Maximum number of concurrent connections made to the API. Do not
 make this number too high, to prevent MyTimetable server overload.
 
 
-* Domain prefix for Blackboard username: configure this setting if your MyTimetable usernames include a Windows domain name
+* __Domain prefix for Blackboard username__: configure this setting if your MyTimetable usernames include a Windows domain name
 (`DOMAIN\username`) whereas your Blackboard usernames do not have the domain part (`username`).
 
 
-* Override CSS: enter custom CSS to be inserted with the building block.
+* __Override CSS__: enter custom CSS to be inserted with the building block.
 
 Logging
 -------
