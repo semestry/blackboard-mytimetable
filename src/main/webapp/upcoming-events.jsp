@@ -54,7 +54,7 @@
             connectionProblem = true;
         }
     } else {
-        log.debug("User is nog logged in.");
+        log.debug("User is not logged in.");
     }
 
     pageContext.setAttribute("isLoggedIn", isLoggedIn);
