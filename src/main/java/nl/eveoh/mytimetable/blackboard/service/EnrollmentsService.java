@@ -43,16 +43,16 @@ public class EnrollmentsService extends HttpServlet {
         Configuration configuration = ConfigUtil.loadConfig();
 
         if (StringUtils.isBlank(token)) {
-            response.setStatus(HttpServletResponse.SC_PROXY_AUTHENTICATION_REQUIRED);
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "API token required.");
             return;
         }
 
         if (configuration.getApiKey() == null) {
             log.error("API token has not been configured.");
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "API token has not been configured.");
             return;
         } else if (!configuration.getApiKey().equals(token)) {
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "API token invalid.");
             return;
         }
 
@@ -62,11 +62,11 @@ public class EnrollmentsService extends HttpServlet {
             user = userLoader.loadByUserName(username);
         } catch (KeyNotFoundException e) {
             log.info("User could not be found.", e);
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND, "User could not be found.");
             return;
         } catch (PersistenceException e) {
             log.error("Error while loading user.", e);
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while loading user.");
             return;
         }
 
@@ -76,7 +76,7 @@ public class EnrollmentsService extends HttpServlet {
             courseMemberships = membershipLoader.loadByUserId(user.getId());
         } catch (PersistenceException e) {
             log.error("Error while loading courses for user.", e);
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while loading courses for user.");
             return;
         }
 
@@ -85,7 +85,7 @@ public class EnrollmentsService extends HttpServlet {
             courseLoader = CourseDbLoader.Default.getInstance();
         } catch (PersistenceException e) {
             log.error("Error while loading courses for user.", e);
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while loading courses for user.");
             return;
         }
 
@@ -97,7 +97,7 @@ public class EnrollmentsService extends HttpServlet {
                 enrollment.setCourse(new Course(courseLoader.loadById(membership.getCourseId())));
             } catch (PersistenceException e) {
                 log.error("Error while loading courses for user.", e);
-                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while loading courses for user.");
                 return;
             }
 
