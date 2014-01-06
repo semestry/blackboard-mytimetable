@@ -3,7 +3,7 @@
     <display-name>mytimetable-building-block</display-name>
 
     <listener>
-        <listener-class>nl.eveoh.mytimetable.blackboard.Log4jInitListener</listener-class>
+        <listener-class>nl.eveoh.mytimetable.blackboard.ShutdownListener</listener-class>
     </listener>
 
     <servlet>

@@ -1,6 +1,6 @@
 apply plugin: 'war'
 
-group = 'nl.eveoh.mytimetable.blackboard'
+group = 'nl.eveoh.mytimetable'
 version = '2.0.0'
 
 sourceCompatibility = 1.6
@@ -8,6 +8,8 @@ targetCompatibility = 1.6
 
 ext.jacksonVersion = '2.2.3'
 ext.blackboardVersion = '9.1.120113.0'
+ext.logbackVersion = '1.0.13'
+ext.slf4jVersion = '1.7.5'
 
 war {
     // Replace version in Blackboard Manifest
@@ -29,6 +31,11 @@ war {
     manifest.from(jar.manifest)
 }
 
+configurations {
+    // Exclude commons-logging dependency, the SLF4J bridge will take care of this
+    all*.exclude group: 'commons-logging', module: 'commons-logging'
+}
+
 repositories {
     maven {
         url "https://maven.eveoh.nl/content/groups/public"
@@ -38,12 +45,13 @@ repositories {
 dependencies {
     providedCompile 'javax.servlet:servlet-api:2.5'
 
-    compile 'log4j:log4j:1.2.16'
-    compile 'org.slf4j:slf4j-log4j12:1.6.4'
+    compile "ch.qos.logback:logback-classic:${logbackVersion}"
+    compile "org.slf4j:slf4j-api:${slf4jVersion}"
+    compile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
 
     compile 'org.apache.commons:commons-lang3:3.1'
 
-    compile 'nl.eveoh.mytimetable.apiclient:mytimetable-api-client:1.0.3'
+    compile 'nl.eveoh.mytimetable:mytimetable-api-client:1.1.0'
 
     compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
