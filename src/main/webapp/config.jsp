@@ -91,7 +91,7 @@
 
             <bbNG:step title="API connection configuration" instructions="Configure the MyTimetable web service to be used by this building block.">
 
-                <bbNG:dataElement label="MyTimetable API URL (one per line)" isRequired="true">
+                <bbNG:dataElement label="MyTimetable API URL (one per line, ending with '/api/v0/')" isRequired="true">
                     <textarea
                             name="apiEndpointUris"
                             cols="80"
@@ -148,7 +148,7 @@
             </bbNG:step>
 
             <bbNG:step title="Domain configuration" instructions="Configure domain specific settings for the MyTimetable API.">
-                <bbNG:dataElement label="Domain prefix for Blackboard username" isRequired="false">
+                <bbNG:dataElement label="Domain prefix for Blackboard username (excluding slash)" isRequired="false">
                     <input
                             type="text"
                             name="usernameDomainPrefix"
