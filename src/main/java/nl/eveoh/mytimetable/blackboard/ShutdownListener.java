@@ -7,7 +7,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
- * Shuts down logback properly.
+ * Shuts down logback properly and shuts down API client.
  */
 public class ShutdownListener implements ServletContextListener {
     @Override
@@ -20,5 +20,8 @@ public class ShutdownListener implements ServletContextListener {
         // Stop Logback
         LoggerContext loggerContext = (LoggerContext) LoggerFactory.getILoggerFactory();
         loggerContext.stop();
+
+        // Stop MyTimetable API client
+        MyTimetableServiceContainer.getService().close();
     }
 }
