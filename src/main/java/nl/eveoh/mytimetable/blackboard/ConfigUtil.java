@@ -83,6 +83,9 @@ public abstract class ConfigUtil {
         try {
             PlugInConfig pc = new PlugInConfig("evh", "mytimetable-b2");
 
+            // Make sure the config directory exists
+            pc.getConfigDirectory().mkdirs();
+
             out = new BufferedWriter(new FileWriter(pc.getConfigDirectory().getAbsolutePath() + "/" + CONFIG_FILE));
         } catch (Exception ex) {
             log.error("Could not open plugin configuration for saving", ex);
@@ -117,7 +120,7 @@ public abstract class ConfigUtil {
 
             in = new BufferedReader(new FileReader(pc.getConfigDirectory().getAbsolutePath() + "/" + CONFIG_FILE));
         } catch (Exception ex) {
-            log.error("Could not open plugin configuration for saving", ex);
+            log.error("Could not open plugin configuration for loading", ex);
             return new WidgetConfiguration();
         }
 
