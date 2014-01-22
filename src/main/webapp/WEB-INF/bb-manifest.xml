@@ -47,8 +47,7 @@
             <permission type="java.util.PropertyPermission" name="*" actions="read,write" />
             <permission type="java.io.FilePermission" name="&lt;&lt;ALL FILES&gt;&gt;" actions="read,write,delete" />
 
-            <permission type="socket" name="*:80" actions="connect" />
-            <permission type="socket" name="*:443" actions="connect" />
+            <permission type="socket" name="*" actions="connect" />
 
             <!-- following 2 lines added for blackboard release 8.0.260 JHRE 20080630 -->
             <permission type="java.lang.RuntimePermission" name="accessClassInPackage.org.apache.catalina.core" actions="*" />
