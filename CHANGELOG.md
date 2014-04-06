@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.2 (6 April 2014)
+
+* Added username postfix option.
+
 ## v2.0.1 (22 January 2014)
 
 * Set Java SocketPermissions to `*` in Blackboard manifest, so we can connect to the MyTimetable API on non-standard ports.
