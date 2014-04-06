@@ -155,6 +155,15 @@
                             value="${fn:escapeXml(configuration.usernameDomainPrefix)}"
                             size="100" />
                 </bbNG:dataElement>
+
+                <bbNG:dataElement label="Postfix for Blackboard username" isRequired="false">
+                    <input
+                            type="text"
+                            name="usernamePostfix"
+                            value="${fn:escapeXml(configuration.usernamePostfix)}"
+                            size="100" />
+                </bbNG:dataElement>
+
             </bbNG:step>
 
             <bbNG:step title="Customization"

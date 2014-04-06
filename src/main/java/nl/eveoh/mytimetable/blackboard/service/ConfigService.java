@@ -135,6 +135,11 @@ public class ConfigService extends HttpServlet {
             usernameDomainPrefix = null;
         }
 
+        String usernamePostfix = request.getParameter("usernamePostfix");
+        if (StringUtils.isBlank(usernamePostfix)) {
+            usernamePostfix = null;
+        }
+
         String customCss = request.getParameter("customCss");
         if (StringUtils.isBlank(customCss)) {
             customCss = null;
@@ -148,7 +153,8 @@ public class ConfigService extends HttpServlet {
 
             try {
                 saveConfig(applicationUri, selectedTarget, numberOfEvents, apiEndpointUris, apiKey, apiSslCnCheck,
-                        apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, customCss);
+                        apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix,
+                        customCss);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -165,7 +171,7 @@ public class ConfigService extends HttpServlet {
     private void saveConfig(String applicationUri, String selectedTarget, int numberOfEvents,
                             ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
                             int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
-                            String usernameDomainPrefix, String customCss) {
+                            String usernameDomainPrefix, String usernamePostfix, String customCss) {
         try {
             WidgetConfiguration configuration = ConfigUtil.loadConfig();
 
@@ -179,6 +185,7 @@ public class ConfigService extends HttpServlet {
             configuration.setApiSocketTimeout(apiSocketTimeout);
             configuration.setApiMaxConnections(apiMaxConnections);
             configuration.setUsernameDomainPrefix(usernameDomainPrefix);
+            configuration.setUsernamePostfix(usernamePostfix);
             configuration.setCustomCss(customCss);
 
             ConfigUtil.saveConfig(configuration);

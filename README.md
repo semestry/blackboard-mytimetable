@@ -44,6 +44,8 @@ make this number too high, to prevent MyTimetable server overload.
 
 * __Domain prefix for Blackboard username__: configure this setting if your MyTimetable usernames include a Windows domain name
 (`DOMAIN\username`) whereas your Blackboard usernames do not have the domain part (`username`).
+* __Postfix for Blackboard username__: configure this setting if your MyTimetable usernames have a postfix which your Blackboard
+usernames do not have (e.g., an email domain).
 
 
 * __Override CSS__: enter custom CSS to be inserted with the building block.
