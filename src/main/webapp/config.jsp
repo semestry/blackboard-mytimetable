@@ -37,6 +37,7 @@
 
         WidgetConfiguration configuration = (WidgetConfiguration) request.getAttribute("configuration");
         pageContext.setAttribute("configuration", configuration);
+        pageContext.setAttribute("timetableTypesArray", configuration.getTimetableTypes().toArray(new String[0]));
 
         if (messages == null) {
             // We were not called from the Servlet
@@ -107,6 +108,14 @@
                             size="100" />
 
                     <div class="error">${messages.apiKey}</div>
+                </bbNG:dataElement>
+
+                <bbNG:dataElement label="Timetable types to display (semi-colon separated)">
+                    <input
+                            type="text"
+                            name="timetableTypes"
+                            value="${fn:escapeXml(fn:join(timetableTypesArray,";"))}"
+                            size="500" />
                 </bbNG:dataElement>
 
                 <bbNG:dataElement label="Disable SSL certificate CN verification">

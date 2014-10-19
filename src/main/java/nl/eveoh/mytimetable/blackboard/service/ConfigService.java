@@ -16,6 +16,7 @@
 
 package nl.eveoh.mytimetable.blackboard.service;
 
+import com.google.common.base.Splitter;
 import nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration;
 import nl.eveoh.mytimetable.apiclient.service.MyTimetableServiceImpl;
 import nl.eveoh.mytimetable.blackboard.ConfigUtil;
@@ -29,10 +30,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Servlet that handles the POST request from the config.jsp page, and saves the configuration files to the Blackboard
@@ -145,6 +143,8 @@ public class ConfigService extends HttpServlet {
             customCss = null;
         }
 
+        String timetableTypes = request.getParameter("timetableTypes");
+
         request.setAttribute("messages", messages);
         request.setAttribute("targets", ConfigUtil.getHrefTargets());
 
@@ -154,7 +154,7 @@ public class ConfigService extends HttpServlet {
             try {
                 saveConfig(applicationUri, selectedTarget, numberOfEvents, apiEndpointUris, apiKey, apiSslCnCheck,
                         apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix,
-                        customCss);
+                        customCss, timetableTypes);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -171,7 +171,8 @@ public class ConfigService extends HttpServlet {
     private void saveConfig(String applicationUri, String selectedTarget, int numberOfEvents,
                             ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
                             int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
-                            String usernameDomainPrefix, String usernamePostfix, String customCss) {
+                            String usernameDomainPrefix, String usernamePostfix, String customCss,
+                            String timetableTypesStr) {
         try {
             WidgetConfiguration configuration = ConfigUtil.loadConfig();
 
@@ -187,6 +188,14 @@ public class ConfigService extends HttpServlet {
             configuration.setUsernameDomainPrefix(usernameDomainPrefix);
             configuration.setUsernamePostfix(usernamePostfix);
             configuration.setCustomCss(customCss);
+
+            List<String> timetableTypes = new ArrayList<String>(
+                    Splitter.on(';').trimResults().omitEmptyStrings().splitToList(timetableTypesStr));
+
+            if (!timetableTypes.isEmpty()) {
+                configuration.getTimetableTypes().clear();
+                configuration.getTimetableTypes().addAll(timetableTypes);
+            }
 
             ConfigUtil.saveConfig(configuration);
 
