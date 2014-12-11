@@ -34,6 +34,7 @@ automatically trigger authentication.
 on separate lines, to support failover in the case of issues with one of the application servers.
 * __MyTimetable API key__: a MyTimetable API key, as included in the `api_tokens` table. The key needs to have 'elevated'
 permissions (`is_elevated` should be True)
+* __Timetable types to display__: Semi-colon separated list of MyTimetable timetable types to display. This is normally used to exclude location and zone timetables from the display. The default (empty) value should be good enough for most users, and includes all non-location timetable types.
 * __Disable SSL certificate CN verification__: Tick this box to disable the strict hostname checks and allow any
 hostname in the certificate. Useful when the connection is made using an internal hostname. The SSL certificate
 still has to be valid.
