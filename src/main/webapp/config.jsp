@@ -115,7 +115,7 @@
                             type="text"
                             name="timetableTypes"
                             value="${fn:escapeXml(fn:join(timetableTypesArray,";"))}"
-                            size="500" />
+                            size="100" />
                 </bbNG:dataElement>
 
                 <bbNG:dataElement label="Disable SSL certificate CN verification">
