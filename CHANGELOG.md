@@ -1,5 +1,17 @@
 # Changelog
 
+## v2.0.5 (5 March 2015)
+
+* Fixed width of the timetable types column on the configuration page.
+
+## v2.0.4 (4 March 2015)
+
+* Disabled SSLv2Hello/SSLv3 support.
+
+## v2.0.3 (11 December 2014)
+
+* Added timetable types option
+
 ## v2.0.2 (6 April 2014)
 
 * Added username postfix option.
