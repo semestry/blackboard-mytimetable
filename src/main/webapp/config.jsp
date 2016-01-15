@@ -88,6 +88,13 @@
 
                     <div class="error">${messages.numberOfEvents}</div>
                 </bbNG:dataElement>
+
+                <bbNG:dataElement label="Include activity type in overview" isRequired="true">
+                    <input
+                            type="checkbox"
+                            name="showActivityType"
+                            value="enable" <c:if test="${configuration.showActivityType}">checked="checked" </c:if>/>
+                </bbNG:dataElement>
             </bbNG:step>
 
             <bbNG:step title="API connection configuration" instructions="Configure the MyTimetable web service to be used by this building block.">

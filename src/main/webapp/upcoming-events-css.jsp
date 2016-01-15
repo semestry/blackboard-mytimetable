@@ -32,6 +32,11 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
     padding-left: 0;
 }
 
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-type {
+    width: 60px;
+    min-width: 60px;
+}
+
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-date {
     width: 30px;
     min-width: 30px;

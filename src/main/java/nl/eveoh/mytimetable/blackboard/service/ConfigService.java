@@ -84,6 +84,9 @@ public class ConfigService extends HttpServlet {
             messages.put("numberOfEvents", "Please enter a valid number.");
         }
 
+        String showActivityTypeString = request.getParameter("showActivityType");
+        boolean showActivityType = showActivityTypeString != null && showActivityTypeString.equals("enable");
+
         ArrayList<String> apiEndpointUris = new ArrayList<String>();
         String apiEndpointUrisString = request.getParameter("apiEndpointUris");
         if (StringUtils.isBlank(apiEndpointUrisString)) {
@@ -152,9 +155,7 @@ public class ConfigService extends HttpServlet {
             // Save the configuration.
 
             try {
-                saveConfig(applicationUri, selectedTarget, numberOfEvents, apiEndpointUris, apiKey, apiSslCnCheck,
-                        apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix,
-                        customCss, timetableTypes);
+                saveConfig(applicationUri, selectedTarget, numberOfEvents, showActivityType, apiEndpointUris, apiKey, apiSslCnCheck, apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix, customCss, timetableTypes);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -168,7 +169,7 @@ public class ConfigService extends HttpServlet {
         }
     }
 
-    private void saveConfig(String applicationUri, String selectedTarget, int numberOfEvents,
+    private void saveConfig(String applicationUri, String selectedTarget, int numberOfEvents, boolean showActivityType,
                             ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
                             int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
                             String usernameDomainPrefix, String usernamePostfix, String customCss,
@@ -179,6 +180,7 @@ public class ConfigService extends HttpServlet {
             configuration.setApplicationUri(applicationUri);
             configuration.setApplicationTarget(selectedTarget);
             configuration.setNumberOfEvents(numberOfEvents);
+            configuration.setShowActivityType(showActivityType);
             configuration.setApiEndpointUris(apiEndpointUris);
             configuration.setApiKey(apiKey);
             configuration.setApiSslCnCheck(apiSslCnCheck);

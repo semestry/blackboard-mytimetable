@@ -100,6 +100,11 @@
                     <th class="eveoh-mytimetable-event">
                         <fmt:message key="Header_Description" />
                     </th>
+                    <c:if test="${configuration.showActivityType}">
+                        <th class="eveoh-mytimetable-type">
+                            <fmt:message key="Header_ActivityType" />
+                        </th>
+                    </c:if>
                     <th class="eveoh-mytimetable-date">
                         <fmt:message key="Header_Date" />
                     </th>
@@ -116,6 +121,10 @@
                     <tr>
                         <td class="eveoh-mytimetable-event">
                             <span><c:out value="${event.activityDescription}" /></span></td>
+                        <c:if test="${configuration.showActivityType}">
+                            <td class="eveoh-mytimetable-type">
+                                <span><c:out value="${event.activityType}" /></span></td>
+                        </c:if>
                         <td class="eveoh-mytimetable-date">
                             <fmt:formatDate pattern="dd-MM" value="${event.startDate}" />
                         </td>
