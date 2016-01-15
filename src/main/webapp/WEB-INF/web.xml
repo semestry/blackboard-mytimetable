@@ -12,6 +12,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>personalizationServlet</servlet-name>
+        <servlet-class>nl.eveoh.mytimetable.blackboard.service.PersonalizationService</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>enrollmentsServlet</servlet-name>
         <servlet-class>nl.eveoh.mytimetable.blackboard.service.EnrollmentsService</servlet-class>
     </servlet>
@@ -19,6 +24,11 @@
     <servlet-mapping>
         <servlet-name>configServlet</servlet-name>
         <url-pattern>/configService</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>personalizationServlet</servlet-name>
+        <url-pattern>/personalizationService</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

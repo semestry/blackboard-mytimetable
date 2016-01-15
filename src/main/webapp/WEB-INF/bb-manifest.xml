@@ -24,6 +24,7 @@
             <module-type ext-ref="mytimetable-b2-module" title="MyTimetable upcoming events" uicreatable="false">
                 <jsp>
                     <view>/upcoming-events.jsp</view>
+                    <edit>/edit.jsp</edit>
                 </jsp>
             </module-type>
 

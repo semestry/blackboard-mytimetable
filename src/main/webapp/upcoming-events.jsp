@@ -1,15 +1,16 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page import="
     blackboard.data.user.User,
+    blackboard.portal.external.CustomData,
     nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration,
     nl.eveoh.mytimetable.apiclient.model.Event,
     nl.eveoh.mytimetable.apiclient.service.MyTimetableServiceImpl,
     nl.eveoh.mytimetable.blackboard.MyTimetableServiceContainer,
     org.slf4j.Logger,
     org.slf4j.LoggerFactory,
-    java.io.PrintWriter,
-    java.util.List
+    java.io.PrintWriter
 "%>
+<%@ page import="java.util.List" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -24,6 +25,12 @@
 
     WidgetConfiguration configuration = (WidgetConfiguration) service.getConfiguration();
     pageContext.setAttribute("configuration", configuration);
+
+    CustomData cd = CustomData.getModulePersonalizationData(pageContext);
+    String numberOfActivities = cd.getValue("numberOfActivities");
+    if (numberOfActivities == null) {
+        numberOfActivities = String.valueOf(configuration.getNumberOfEvents());
+    }
 
     // get current username
     String username = null;
@@ -45,6 +52,7 @@
 
         try {
             upcomingEvents = service.getUpcomingEvents(username);
+            upcomingEvents = upcomingEvents.subList(0, Integer.parseInt(numberOfActivities));
         } catch (Exception e) {
             ex = e;
             log.error("Unable to fetch events.", e);
