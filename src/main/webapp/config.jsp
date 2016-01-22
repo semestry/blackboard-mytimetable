@@ -79,14 +79,41 @@
                     <div class="error">${messages.applicationTarget}</div>
                 </bbNG:dataElement>
 
-                <bbNG:dataElement label="Number of events to show" isRequired="true">
+                <bbNG:dataElement label="Maximum number of events to show" isRequired="true">
                     <input
-                            type="text"
+                            type="number"
                             name="numberOfEvents"
-                            value="${fn:escapeXml(configuration.numberOfEvents)}"
-                            size="5" />
+                            value="<%= configuration.getMaxNumberOfEvents() %>"
+                            min="1"/>
 
                     <div class="error">${messages.numberOfEvents}</div>
+                </bbNG:dataElement>
+                <bbNG:dataElement label="Default number of events to show" isRequired="true">
+                    <input
+                            type="number"
+                            name="defaultNumberOfEvents"
+                            value="<%= configuration.getDefaultNumberOfEvents() %>"
+                            min="1"
+                            max="<%= configuration.getMaxNumberOfEvents() %>"
+                            />
+
+                    <div class="error">${messages.numberOfEvents}</div>
+                </bbNG:dataElement>
+
+                <bbNG:dataElement label="Include activity type in overview" isRequired="true">
+                    <input
+                            type="checkbox"
+                            name="showActivityType"
+                            value="enable"  <c:if test="${configuration.showActivityType}">checked="checked" </c:if>/>
+                </bbNG:dataElement>
+
+                <bbNG:dataElement label="Unknown location description" isRequired="false">
+                    <input
+                            type="text"
+                            name="unknownLocationDescription"
+                            value="${fn:escapeXml(configuration.unknownLocationDescription)}"
+                            size="100" />
+
                 </bbNG:dataElement>
             </bbNG:step>
 

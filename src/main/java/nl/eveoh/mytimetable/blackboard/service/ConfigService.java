@@ -48,8 +48,6 @@ public class ConfigService extends HttpServlet {
 
     public static final String CONFIG_JSP = "/config.jsp";
 
-
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("messages", new HashMap<String, String>());
@@ -83,6 +81,16 @@ public class ConfigService extends HttpServlet {
         } catch (NumberFormatException ex) {
             messages.put("numberOfEvents", "Please enter a valid number.");
         }
+
+        int defaultNumberOfEvents = 5;
+        try {
+            defaultNumberOfEvents = Integer.parseInt(request.getParameter("defaultNumberOfEvents"));
+        } catch (NumberFormatException ex) {
+            messages.put("defaultNumberOfEvents", "Please enter a valid number.");
+        }
+
+        String showActivityTypeString = request.getParameter("showActivityType");
+        boolean showActivityType = showActivityTypeString != null && showActivityTypeString.equals("enable");
 
         ArrayList<String> apiEndpointUris = new ArrayList<String>();
         String apiEndpointUrisString = request.getParameter("apiEndpointUris");
@@ -145,6 +153,10 @@ public class ConfigService extends HttpServlet {
 
         String timetableTypes = request.getParameter("timetableTypes");
 
+        String unknownLocationDescription = request.getParameter("unknownLocationDescription");
+        if (StringUtils.isBlank(unknownLocationDescription)) {
+            unknownLocationDescription = null;
+        }
         request.setAttribute("messages", messages);
         request.setAttribute("targets", ConfigUtil.getHrefTargets());
 
@@ -152,9 +164,7 @@ public class ConfigService extends HttpServlet {
             // Save the configuration.
 
             try {
-                saveConfig(applicationUri, selectedTarget, numberOfEvents, apiEndpointUris, apiKey, apiSslCnCheck,
-                        apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix,
-                        customCss, timetableTypes);
+                saveConfig(applicationUri, selectedTarget, numberOfEvents, defaultNumberOfEvents, showActivityType, apiEndpointUris, apiKey, apiSslCnCheck, apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix, customCss, timetableTypes, unknownLocationDescription);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -168,17 +178,18 @@ public class ConfigService extends HttpServlet {
         }
     }
 
-    private void saveConfig(String applicationUri, String selectedTarget, int numberOfEvents,
+    private void saveConfig(String applicationUri, String selectedTarget, int maxNumberOfEvents, int defaultNumberOfEvents,
+                            boolean showActivityType,
                             ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
-                            int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
-                            String usernameDomainPrefix, String usernamePostfix, String customCss,
-                            String timetableTypesStr) {
+                            int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections, String usernameDomainPrefix, String usernamePostfix, String customCss, String timetableTypesStr, String unknownLocationDescription) {
         try {
             WidgetConfiguration configuration = ConfigUtil.loadConfig();
 
             configuration.setApplicationUri(applicationUri);
             configuration.setApplicationTarget(selectedTarget);
-            configuration.setNumberOfEvents(numberOfEvents);
+            configuration.setMaxNumberOfEvents(maxNumberOfEvents);
+            configuration.setDefaultNumberOfEvents(defaultNumberOfEvents);
+            configuration.setShowActivityType(showActivityType);
             configuration.setApiEndpointUris(apiEndpointUris);
             configuration.setApiKey(apiKey);
             configuration.setApiSslCnCheck(apiSslCnCheck);
@@ -188,6 +199,7 @@ public class ConfigService extends HttpServlet {
             configuration.setUsernameDomainPrefix(usernameDomainPrefix);
             configuration.setUsernamePostfix(usernamePostfix);
             configuration.setCustomCss(customCss);
+            configuration.setUnknownLocationDescription(unknownLocationDescription);
 
             List<String> timetableTypes = new ArrayList<String>(
                     Splitter.on(';').trimResults().omitEmptyStrings().splitToList(timetableTypesStr));

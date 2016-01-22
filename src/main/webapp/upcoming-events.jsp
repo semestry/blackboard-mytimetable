@@ -1,15 +1,16 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page import="
     blackboard.data.user.User,
+    blackboard.portal.external.CustomData,
     nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration,
     nl.eveoh.mytimetable.apiclient.model.Event,
     nl.eveoh.mytimetable.apiclient.service.MyTimetableServiceImpl,
     nl.eveoh.mytimetable.blackboard.MyTimetableServiceContainer,
     org.slf4j.Logger,
     org.slf4j.LoggerFactory,
-    java.io.PrintWriter,
-    java.util.List
+    java.io.PrintWriter
 "%>
+<%@ page import="java.util.List" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -24,6 +25,17 @@
 
     WidgetConfiguration configuration = (WidgetConfiguration) service.getConfiguration();
     pageContext.setAttribute("configuration", configuration);
+
+    CustomData cd = CustomData.getModulePersonalizationData(pageContext);
+
+    int numberOfActivities;
+
+    if (cd.getValue("numberOfActivities") == null) {
+        numberOfActivities = configuration.getDefaultNumberOfEvents();
+    } else {
+        numberOfActivities = Math.min(Integer.parseInt(cd.getValue("numberOfActivities")),
+                configuration.getMaxNumberOfEvents());
+    }
 
     // get current username
     String username = null;
@@ -45,6 +57,7 @@
 
         try {
             upcomingEvents = service.getUpcomingEvents(username);
+            upcomingEvents = upcomingEvents.subList(0, numberOfActivities);
         } catch (Exception e) {
             ex = e;
             log.error("Unable to fetch events.", e);
@@ -100,6 +113,11 @@
                     <th class="eveoh-mytimetable-event">
                         <fmt:message key="Header_Description" />
                     </th>
+                    <c:if test="${configuration.showActivityType}">
+                        <th class="eveoh-mytimetable-type">
+                            <fmt:message key="Header_ActivityType" />
+                        </th>
+                    </c:if>
                     <th class="eveoh-mytimetable-date">
                         <fmt:message key="Header_Date" />
                     </th>
@@ -116,6 +134,10 @@
                     <tr>
                         <td class="eveoh-mytimetable-event">
                             <span><c:out value="${event.activityDescription}" /></span></td>
+                        <c:if test="${configuration.showActivityType}">
+                            <td class="eveoh-mytimetable-type">
+                                <span><c:out value="${event.activityType}" /></span></td>
+                        </c:if>
                         <td class="eveoh-mytimetable-date">
                             <fmt:formatDate pattern="dd-MM" value="${event.startDate}" />
                         </td>
@@ -125,7 +147,14 @@
                         <td class="eveoh-mytimetable-location">
                             <c:choose>
                                 <c:when test="${empty event.locations}">
-                                    <fmt:message key="UnknownLocation" />
+                                    <c:choose>
+                                        <c:when test="${empty configuration.unknownLocationDescription}">
+                                            <fmt:message key="UnknownLocation"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:out value="${configuration.unknownLocationDescription}">Unknown Location</c:out>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:when>
                                 <c:otherwise>
                                     <span title="<c:forEach items="${event.locations}" var="l" varStatus="status"><c:if test="${status.index > 0}">&#13;</c:if><c:out value="${l.name}" /></c:forEach>">
