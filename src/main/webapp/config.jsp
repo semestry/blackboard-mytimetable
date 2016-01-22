@@ -104,6 +104,15 @@
                             name="showActivityType"
                             value="enable"  <c:if test="${configuration.showActivityType}">checked="checked" </c:if>/>
                 </bbNG:dataElement>
+
+                <bbNG:dataElement label="Unknown location description" isRequired="false">
+                    <input
+                            type="text"
+                            name="unknownLocationDescription"
+                            value="${fn:escapeXml(configuration.unknownLocationDescription)}"
+                            size="100" />
+
+                </bbNG:dataElement>
             </bbNG:step>
 
             <bbNG:step title="API connection configuration" instructions="Configure the MyTimetable web service to be used by this building block.">

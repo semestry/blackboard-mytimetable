@@ -153,6 +153,10 @@ public class ConfigService extends HttpServlet {
 
         String timetableTypes = request.getParameter("timetableTypes");
 
+        String unknownLocationDescription = request.getParameter("unknownLocationDescription");
+        if (StringUtils.isBlank(unknownLocationDescription)) {
+            unknownLocationDescription = null;
+        }
         request.setAttribute("messages", messages);
         request.setAttribute("targets", ConfigUtil.getHrefTargets());
 
@@ -160,7 +164,7 @@ public class ConfigService extends HttpServlet {
             // Save the configuration.
 
             try {
-                saveConfig(applicationUri, selectedTarget, numberOfEvents, defaultNumberOfEvents, showActivityType, apiEndpointUris, apiKey, apiSslCnCheck, apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix, customCss, timetableTypes);
+                saveConfig(applicationUri, selectedTarget, numberOfEvents, defaultNumberOfEvents, showActivityType, apiEndpointUris, apiKey, apiSslCnCheck, apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix, customCss, timetableTypes, unknownLocationDescription);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -177,9 +181,7 @@ public class ConfigService extends HttpServlet {
     private void saveConfig(String applicationUri, String selectedTarget, int maxNumberOfEvents, int defaultNumberOfEvents,
                             boolean showActivityType,
                             ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
-                            int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
-                            String usernameDomainPrefix, String usernamePostfix, String customCss,
-                            String timetableTypesStr) {
+                            int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections, String usernameDomainPrefix, String usernamePostfix, String customCss, String timetableTypesStr, String unknownLocationDescription) {
         try {
             WidgetConfiguration configuration = ConfigUtil.loadConfig();
 
@@ -197,6 +199,7 @@ public class ConfigService extends HttpServlet {
             configuration.setUsernameDomainPrefix(usernameDomainPrefix);
             configuration.setUsernamePostfix(usernamePostfix);
             configuration.setCustomCss(customCss);
+            configuration.setUnknownLocationDescription(unknownLocationDescription);
 
             List<String> timetableTypes = new ArrayList<String>(
                     Splitter.on(';').trimResults().omitEmptyStrings().splitToList(timetableTypesStr));

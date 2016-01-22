@@ -147,7 +147,14 @@
                         <td class="eveoh-mytimetable-location">
                             <c:choose>
                                 <c:when test="${empty event.locations}">
-                                    <fmt:message key="UnknownLocation" />
+                                    <c:choose>
+                                        <c:when test="${empty configuration.unknownLocationDescription}">
+                                            <fmt:message key="UnknownLocation"/>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:out value="${configuration.unknownLocationDescription}">Unknown Location</c:out>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:when>
                                 <c:otherwise>
                                     <span title="<c:forEach items="${event.locations}" var="l" varStatus="status"><c:if test="${status.index > 0}">&#13;</c:if><c:out value="${l.name}" /></c:forEach>">
