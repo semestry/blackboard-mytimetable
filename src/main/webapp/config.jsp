@@ -79,11 +79,20 @@
                     <div class="error">${messages.applicationTarget}</div>
                 </bbNG:dataElement>
 
-                <bbNG:dataElement label="Number of events to show" isRequired="true">
+                <bbNG:dataElement label="Maximum number of events to show" isRequired="true">
                     <input
                             type="text"
                             name="numberOfEvents"
-                            value="${fn:escapeXml(configuration.numberOfEvents)}"
+                            value="${fn:escapeXml(configuration.maxNumberOfEvents)}"
+                            size="5" />
+
+                    <div class="error">${messages.numberOfEvents}</div>
+                </bbNG:dataElement>
+                <bbNG:dataElement label="Default number of events to show" isRequired="true">
+                    <input
+                            type="text"
+                            name="defaultNumberOfEvents"
+                            value="${fn:escapeXml(configuration.defaultNumberOfEvents)}"
                             size="5" />
 
                     <div class="error">${messages.numberOfEvents}</div>
@@ -93,7 +102,7 @@
                     <input
                             type="checkbox"
                             name="showActivityType"
-                            value="enable" <c:if test="${configuration.showActivityType}">checked="checked" </c:if>/>
+                            value="enable"  <c:if test="${configuration.showActivityType}">checked="checked" </c:if>/>
                 </bbNG:dataElement>
             </bbNG:step>
 

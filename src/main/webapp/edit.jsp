@@ -24,10 +24,10 @@
 
         Configuration configuration = ConfigUtil.loadConfig();
 
-        int maxNumberOfActivities = configuration.getNumberOfEvents();
+        int maxNumberOfActivities = configuration.getMaxNumberOfEvents();
 
         if (numberOfActivities == null) {
-            numberOfActivities = "5";
+            numberOfActivities = String.valueOf(configuration.getDefaultNumberOfEvents());
         }
 
         Map<String, String> messages = (Map<String, String>) request.getAttribute("messages");

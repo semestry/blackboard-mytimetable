@@ -48,8 +48,6 @@ public class ConfigService extends HttpServlet {
 
     public static final String CONFIG_JSP = "/config.jsp";
 
-
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("messages", new HashMap<String, String>());
@@ -82,6 +80,13 @@ public class ConfigService extends HttpServlet {
             numberOfEvents = Integer.parseInt(request.getParameter("numberOfEvents"));
         } catch (NumberFormatException ex) {
             messages.put("numberOfEvents", "Please enter a valid number.");
+        }
+
+        int defaultNumberOfEvents = 5;
+        try {
+            defaultNumberOfEvents = Integer.parseInt(request.getParameter("defaultNumberOfEvents"));
+        } catch (NumberFormatException ex) {
+            messages.put("defaultNumberOfEvents", "Please enter a valid number.");
         }
 
         String showActivityTypeString = request.getParameter("showActivityType");
@@ -155,7 +160,7 @@ public class ConfigService extends HttpServlet {
             // Save the configuration.
 
             try {
-                saveConfig(applicationUri, selectedTarget, numberOfEvents, showActivityType, apiEndpointUris, apiKey, apiSslCnCheck, apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix, customCss, timetableTypes);
+                saveConfig(applicationUri, selectedTarget, numberOfEvents, defaultNumberOfEvents, showActivityType, apiEndpointUris, apiKey, apiSslCnCheck, apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix, customCss, timetableTypes);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -169,7 +174,8 @@ public class ConfigService extends HttpServlet {
         }
     }
 
-    private void saveConfig(String applicationUri, String selectedTarget, int numberOfEvents, boolean showActivityType,
+    private void saveConfig(String applicationUri, String selectedTarget, int maxNumberOfEvents, int defaultNumberOfEvents,
+                            boolean showActivityType,
                             ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
                             int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
                             String usernameDomainPrefix, String usernamePostfix, String customCss,
@@ -179,7 +185,8 @@ public class ConfigService extends HttpServlet {
 
             configuration.setApplicationUri(applicationUri);
             configuration.setApplicationTarget(selectedTarget);
-            configuration.setNumberOfEvents(numberOfEvents);
+            configuration.setMaxNumberOfEvents(maxNumberOfEvents);
+            configuration.setDefaultNumberOfEvents(defaultNumberOfEvents);
             configuration.setShowActivityType(showActivityType);
             configuration.setApiEndpointUris(apiEndpointUris);
             configuration.setApiKey(apiKey);

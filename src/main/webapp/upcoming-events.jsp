@@ -27,9 +27,14 @@
     pageContext.setAttribute("configuration", configuration);
 
     CustomData cd = CustomData.getModulePersonalizationData(pageContext);
-    String numberOfActivities = cd.getValue("numberOfActivities");
-    if (numberOfActivities == null) {
-        numberOfActivities = String.valueOf(configuration.getNumberOfEvents());
+
+    int numberOfActivities;
+
+    if (cd.getValue("numberOfActivities") == null) {
+        numberOfActivities = configuration.getDefaultNumberOfEvents();
+    } else {
+        numberOfActivities = Math.min(Integer.parseInt(cd.getValue("numberOfActivities")),
+                configuration.getMaxNumberOfEvents());
     }
 
     // get current username
@@ -52,7 +57,7 @@
 
         try {
             upcomingEvents = service.getUpcomingEvents(username);
-            upcomingEvents = upcomingEvents.subList(0, Integer.parseInt(numberOfActivities));
+            upcomingEvents = upcomingEvents.subList(0, numberOfActivities);
         } catch (Exception e) {
             ex = e;
             log.error("Unable to fetch events.", e);
