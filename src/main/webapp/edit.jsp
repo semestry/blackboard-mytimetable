@@ -33,6 +33,8 @@
         Map<String, String> messages = (Map<String, String>) request.getAttribute("messages");
         pageContext.setAttribute("messages", messages);
 
+        String instruction = "Set the number of events to show in the upcoming events overview. This can be a number between 1 and  " +  maxNumberOfActivities;
+
     %>
 
     <bbNG:form action="personalizationService" id="configForm" name="configForm" method="post">
@@ -40,8 +42,8 @@
         <div class="error">${messages.error}</div>
 
         <bbNG:dataCollection markUnsavedChanges="false" showSubmitButtons="true">
-            <bbNG:step title="Application configuration"
-                       instructions="Configure the full URL of MyTimetable and the number of events to be shown.">
+            <bbNG:step title="Application settings"
+                       instructions="<%= instruction %>">
 
                 <bbNG:dataElement label="Number of events to show">
                     <input
@@ -53,8 +55,6 @@
                 </bbNG:dataElement>
 
             </bbNG:step>
-
-
             <bbNG:stepSubmit showCancelButton="false"/>
         </bbNG:dataCollection>
     </bbNG:form>

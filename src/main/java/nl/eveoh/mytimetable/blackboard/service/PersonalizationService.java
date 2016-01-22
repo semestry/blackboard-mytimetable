@@ -3,6 +3,8 @@ package nl.eveoh.mytimetable.blackboard.service;
 import blackboard.data.ValidationException;
 import blackboard.persist.PersistenceException;
 import blackboard.portal.external.CustomData;
+import nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration;
+import nl.eveoh.mytimetable.blackboard.ConfigUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,14 +25,22 @@ public class PersonalizationService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        WidgetConfiguration configuration = ConfigUtil.loadConfig();
+
         CustomData cd;
-        String numberOfActivities = req.getParameter("numberOfActivities");
+        String numberOfActivitiesString = req.getParameter("numberOfActivities");
+
+        int numberOfActivities = Integer.parseInt(numberOfActivitiesString);
+
+        if (numberOfActivities < 0 || numberOfActivities > configuration.getMaxNumberOfEvents()) {
+            numberOfActivities = configuration.getDefaultNumberOfEvents();
+        }
 
         Map<String, String> messages = new HashMap<String, String>();
 
         try {
             cd = CustomData.getModulePersonalizationData(req);
-            cd.setValue("numberOfActivities", numberOfActivities);
+            cd.setValue("numberOfActivities", String.valueOf(numberOfActivities));
             cd.save();
         } catch (PersistenceException e) {
             handleException(req, resp, messages, e);
