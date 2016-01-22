@@ -1,4 +1,7 @@
 <%@ page import="blackboard.portal.external.CustomData" %>
+<%@ page import="nl.eveoh.mytimetable.apiclient.configuration.Configuration" %>
+<%@ page import="nl.eveoh.mytimetable.blackboard.ConfigUtil" %>
+<%@ page import="java.util.Map" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -9,17 +12,32 @@
 
 <bbNG:modulePage type="personalize">
 
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
+
     <%
         CustomData cd = CustomData.getModulePersonalizationData(pageContext);
         String numberOfActivities = cd.getValue("numberOfActivities");
+
+        Configuration configuration = ConfigUtil.loadConfig();
+
+        int maxNumberOfActivities = configuration.getNumberOfEvents();
 
         if (numberOfActivities == null) {
             numberOfActivities = "5";
         }
 
+        Map<String, String> messages = (Map<String, String>) request.getAttribute("messages");
+        pageContext.setAttribute("messages", messages);
+
     %>
 
     <bbNG:form action="personalizationService" id="configForm" name="configForm" method="post">
+
+        <div class="error">${messages.error}</div>
 
         <bbNG:dataCollection markUnsavedChanges="false" showSubmitButtons="true">
             <bbNG:step title="Application configuration"
@@ -30,7 +48,8 @@
                             type="number"
                             name="numberOfActivities"
                             value="<%= numberOfActivities %>"
-                            min="1"/>
+                            min="1"
+                            max="<%= maxNumberOfActivities %>"/>
                 </bbNG:dataElement>
 
             </bbNG:step>
