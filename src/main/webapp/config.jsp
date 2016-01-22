@@ -81,19 +81,21 @@
 
                 <bbNG:dataElement label="Maximum number of events to show" isRequired="true">
                     <input
-                            type="text"
+                            type="number"
                             name="numberOfEvents"
-                            value="${fn:escapeXml(configuration.maxNumberOfEvents)}"
-                            size="5" />
+                            value="<%= configuration.getMaxNumberOfEvents() %>"
+                            min="1"/>
 
                     <div class="error">${messages.numberOfEvents}</div>
                 </bbNG:dataElement>
                 <bbNG:dataElement label="Default number of events to show" isRequired="true">
                     <input
-                            type="text"
+                            type="number"
                             name="defaultNumberOfEvents"
-                            value="${fn:escapeXml(configuration.defaultNumberOfEvents)}"
-                            size="5" />
+                            value="<%= configuration.getDefaultNumberOfEvents() %>"
+                            min="1"
+                            max="<%= configuration.getMaxNumberOfEvents() %>"
+                            />
 
                     <div class="error">${messages.numberOfEvents}</div>
                 </bbNG:dataElement>
