@@ -3,6 +3,10 @@
     width: 100%;
 }
 
+.eveoh-mytimetable-hidden {
+    display: none;
+}
+
 table.eveoh-mytimetable-upcoming-events {
     width: 100%;
     margin-bottom: 5px;
