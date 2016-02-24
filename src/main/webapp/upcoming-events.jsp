@@ -76,9 +76,12 @@
 %>
 
 <%@ include file="upcoming-events-css.jsp" %>
+
+<c:if test="${not empty configuration.customCss}">
 <style>
-<%= configuration.getCustomCss() %>
+    <c:out escapeXml="false" value="${configuration.customCss}" />
 </style>
+</c:if>
 
 <fmt:setLocale value="${ctx.locale}" />
 <fmt:setBundle basename="BlackboardMessagesBundle" />
