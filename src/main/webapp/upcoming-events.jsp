@@ -57,7 +57,7 @@
 
         try {
             upcomingEvents = service.getUpcomingEvents(username);
-            upcomingEvents = upcomingEvents.subList(0, numberOfActivities);
+            upcomingEvents = upcomingEvents.subList(0, Math.min(numberOfActivities, upcomingEvents.size()));
         } catch (Exception e) {
             ex = e;
             log.error("Unable to fetch events.", e);
