@@ -22,7 +22,6 @@ table.eveoh-mytimetable-upcoming-events th {
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
-    -moz-binding: url('xml/ff_ellipsis.xml#ellipsis'); /* Fix for FF 3.x, fixed in FF7 (https://bugzilla.mozilla.org/show_bug.cgi?id=312156) */
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
@@ -57,7 +56,6 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location span {
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
-    -moz-binding: url('xml/ff_ellipsis.xml#ellipsis'); /* Fix for FF 3.x, fixed in FF7 (https://bugzilla.mozilla.org/show_bug.cgi?id=312156) */
     display: block;
 }
 
