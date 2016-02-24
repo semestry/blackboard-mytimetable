@@ -21,15 +21,11 @@ table.eveoh-mytimetable-upcoming-events td {
 
 table.eveoh-mytimetable-upcoming-events th {
     font-weight: bold;
+    border-top: 1px solid #ccc;
     overflow: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
-    -moz-binding: url('xml/ff_ellipsis.xml#ellipsis'); /* Fix for FF 3.x, fixed in FF7 (https://bugzilla.mozilla.org/show_bug.cgi?id=312156) */
-}
-
-table.eveoh-mytimetable-upcoming-events td {
-    border-top: 1px dotted #eee;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
@@ -42,13 +38,13 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-type {
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-date {
-    width: 30px;
-    min-width: 30px;
+    width: 40px;
+    min-width: 40px;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-time {
-    width: 70px;
-    min-width: 70px;
+    width: 80px;
+    min-width: 80px;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location {
@@ -58,12 +54,12 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location {
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event span,
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-type span,
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location span {
     overflow: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
     -ms-text-overflow: ellipsis;
-    -moz-binding: url('xml/ff_ellipsis.xml#ellipsis'); /* Fix for FF 3.x, fixed in FF7 (https://bugzilla.mozilla.org/show_bug.cgi?id=312156) */
     display: block;
 }
 
