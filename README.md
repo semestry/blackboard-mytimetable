@@ -4,7 +4,8 @@ Blackboard Building Block for MyTimetable
 This project contains a Building Block for the Blackboard Learn 9 environments.
 It presents the upcoming events to the user and provides a link to MyTimetable:
 
-![](https://blog.eveoh.nl/assets/img/mytimetable_blackboard.png)
+![mytimetable-b2-events](https://cloud.githubusercontent.com/assets/1352315/13292198/12ffa27c-db1b-11e5-9fa9-10cce83c3c3c.png)
+![mytimetable-b2-noevents](https://cloud.githubusercontent.com/assets/1352315/13292197/12f19b6e-db1b-11e5-8fef-85a4588af568.png)
 
 The block also provides a webservice to get the enrollments for a given user.
 This service can be used to import the enrollments from Blackboard Learn into MyTimetable.
