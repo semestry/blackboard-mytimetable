@@ -75,6 +75,14 @@
     pageContext.setAttribute("upcomingEvents", upcomingEvents);
 %>
 
+<fmt:setLocale value="${ctx.locale}" />
+<fmt:setBundle basename="BlackboardMessagesBundle" />
+
+<%-- Start the page with a Scoped element. --%>
+<%-- The element cannot be empty, otherwise it will be removed as well. --%>
+<%-- https://github.com/eveoh/blackboard-mytimetable/issues/8 --%>
+<span class="eveoh-mytimetable-hidden">&nbsp;</span>
+
 <%@ include file="upcoming-events-css.jsp" %>
 
 <c:if test="${not empty configuration.customCss}">
@@ -82,9 +90,6 @@
     <c:out escapeXml="false" value="${configuration.customCss}" />
 </style>
 </c:if>
-
-<fmt:setLocale value="${ctx.locale}" />
-<fmt:setBundle basename="BlackboardMessagesBundle" />
 
 <div id="eveoh-mytimetable-container">
     <c:choose>
