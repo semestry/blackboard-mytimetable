@@ -138,8 +138,9 @@
                         <td class="eveoh-mytimetable-event">
                             <span><c:out value="${event.activityDescription}" /></span></td>
                         <c:if test="${configuration.showActivityType}">
-                            <td class="eveoh-mytimetable-type">
-                                <span><c:out value="${event.activityType}" /></span></td>
+                        <td class="eveoh-mytimetable-type">
+                            <span><c:out value="${event.activityType}" /></span>
+                        </td>
                         </c:if>
                         <td class="eveoh-mytimetable-date">
                             <fmt:formatDate pattern="dd-MM" value="${event.startDate}" />
