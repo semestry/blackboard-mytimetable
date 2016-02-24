@@ -110,9 +110,9 @@
             </p>
         </c:when>
         <c:when test="${empty upcomingEvents}">
-            <p class="eveoh-mytimetable-empty-timetable">
+            <div class="noItems">
                 <fmt:message key="EmptyTimetable" />
-            </p>
+            </div>
         </c:when>
         <c:otherwise>
             <table class="eveoh-mytimetable-upcoming-events" cellpadding="0" cellspacing="0">
