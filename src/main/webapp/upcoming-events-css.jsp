@@ -21,7 +21,7 @@ table.eveoh-mytimetable-upcoming-events td {
 
 table.eveoh-mytimetable-upcoming-events th {
     font-weight: bold;
-    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
     overflow: hidden;
     text-overflow: ellipsis;
     -o-text-overflow: ellipsis;
