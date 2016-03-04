@@ -19,22 +19,25 @@
     </style>
 
     <%
-        CustomData cd = CustomData.getModulePersonalizationData(pageContext);
-        String numberOfActivities = cd.getValue("numberOfActivities");
-
         Configuration configuration = ConfigUtil.loadConfig();
+        CustomData cd = CustomData.getModulePersonalizationData(pageContext);
 
         int maxNumberOfActivities = configuration.getMaxNumberOfEvents();
+        Integer numberOfActivities = null;
 
-        if (numberOfActivities == null) {
-            numberOfActivities = String.valueOf(configuration.getDefaultNumberOfEvents());
+        try {
+            numberOfActivities = Integer.parseInt(cd.getValue("numberOfActivities");
+        } catch (NumberFormatException ignored) {
+        }
+
+        if (numberOfActivities == null || maxNumberOfActivities < numberOfActivities) {
+            numberOfActivities = configuration.getDefaultNumberOfEvents();
         }
 
         Map<String, String> messages = (Map<String, String>) request.getAttribute("messages");
         pageContext.setAttribute("messages", messages);
 
         String instruction = "Set the number of events to show in the upcoming events overview. This can be a number between 1 and  " +  maxNumberOfActivities;
-
     %>
 
     <bbNG:form action="personalizationService" id="configForm" name="configForm" method="post">
