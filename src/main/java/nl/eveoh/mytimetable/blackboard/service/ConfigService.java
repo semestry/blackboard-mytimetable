@@ -35,7 +35,7 @@ import java.util.*;
 /**
  * Servlet that handles the POST request from the config.jsp page, and saves the configuration files to the Blackboard
  * building block configuration directory.
- * 
+ *
  * @author Mike Noordermeer
  * @author Marco Krikke
  * @author Erik van Paassen
@@ -49,7 +49,8 @@ public class ConfigService extends HttpServlet {
     public static final String CONFIG_JSP = "/config.jsp";
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.setAttribute("messages", new HashMap<String, String>());
         request.setAttribute("targets", ConfigUtil.getHrefTargets());
         request.setAttribute("configuration", ConfigUtil.loadConfig());
@@ -164,7 +165,9 @@ public class ConfigService extends HttpServlet {
             // Save the configuration.
 
             try {
-                saveConfig(applicationUri, selectedTarget, numberOfEvents, defaultNumberOfEvents, showActivityType, apiEndpointUris, apiKey, apiSslCnCheck, apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix, customCss, timetableTypes, unknownLocationDescription);
+                saveConfig(applicationUri, selectedTarget, numberOfEvents, defaultNumberOfEvents, showActivityType,
+                        apiEndpointUris, apiKey, apiSslCnCheck, apiConnectTimeout, apiSocketTimeout, apiMaxConnections,
+                        usernameDomainPrefix, usernamePostfix, customCss, timetableTypes, unknownLocationDescription);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -178,10 +181,11 @@ public class ConfigService extends HttpServlet {
         }
     }
 
-    private void saveConfig(String applicationUri, String selectedTarget, int maxNumberOfEvents, int defaultNumberOfEvents,
-                            boolean showActivityType,
-                            ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
-                            int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections, String usernameDomainPrefix, String usernamePostfix, String customCss, String timetableTypesStr, String unknownLocationDescription) {
+    private void saveConfig(String applicationUri, String selectedTarget, int maxNumberOfEvents,
+                            int defaultNumberOfEvents, boolean showActivityType, ArrayList<String> apiEndpointUris,
+                            String apiKey, boolean apiSslCnCheck, int apiConnectTimeout, int apiSocketTimeout,
+                            int apiMaxConnections, String usernameDomainPrefix, String usernamePostfix,
+                            String customCss, String timetableTypesStr, String unknownLocationDescription) {
         try {
             WidgetConfiguration configuration = ConfigUtil.loadConfig();
 

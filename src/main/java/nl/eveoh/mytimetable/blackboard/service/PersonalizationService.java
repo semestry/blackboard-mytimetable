@@ -52,7 +52,8 @@ public class PersonalizationService extends HttpServlet {
 
     }
 
-    private void handleException(HttpServletRequest req, HttpServletResponse resp, Map<String, String> messages, Exception e) throws ServletException, IOException {
+    private void handleException(HttpServletRequest req, HttpServletResponse resp, Map<String, String> messages,
+                                 Exception e) throws ServletException, IOException {
         log.error("Something went wrong with saving the preferences", e);
 
         messages.put("error", "Something went wrong with saving the preferences.");

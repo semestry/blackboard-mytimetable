@@ -34,7 +34,7 @@ import java.util.Properties;
 
 /**
  * Helper methods for {@link nl.eveoh.mytimetable.blackboard.service.ConfigService}.
- * 
+ *
  * @author Marco Krikke
  */
 public abstract class ConfigUtil {
@@ -47,11 +47,10 @@ public abstract class ConfigUtil {
     private static final Logger log = LoggerFactory.getLogger(ConfigUtil.class);
 
 
-
     /**
      * Returns the targets for the full schedule link
-     * 
-     * @return                  Targets for the full schedule link
+     *
+     * @return Targets for the full schedule link
      */
     public static Map<String, String> getHrefTargets() {
         // use a LinkedHashMap to maintain the order of insertion
@@ -65,7 +64,7 @@ public abstract class ConfigUtil {
     /**
      * Saves the configuration to the configuration file.
      *
-     * @param configuration     Properties file with the configuration
+     * @param configuration Properties file with the configuration
      */
     public static void saveConfig(Configuration configuration) {
         BufferedWriter out;
@@ -100,8 +99,8 @@ public abstract class ConfigUtil {
 
     /**
      * Loads the configuration from the configuration file.
-     * 
-     * @return                  Properties file containing the configuration.
+     *
+     * @return Properties file containing the configuration.
      */
     public static WidgetConfiguration loadConfig() {
         BufferedReader in;
@@ -133,9 +132,9 @@ public abstract class ConfigUtil {
 
     /**
      * Checks if the Blackboard user is authorized for the system administration panel.
-     * 
-     * @param request           {@link HttpServletRequest} belonging to the current request.
-     * @param response          {@link HttpServletResponse} belonging to the current request.
+     *
+     * @param request  {@link HttpServletRequest} belonging to the current request.
+     * @param response {@link HttpServletResponse} belonging to the current request.
      */
     public static void authorizeUser(HttpServletRequest request, HttpServletResponse response) {
         // Check user permissions
@@ -149,9 +148,10 @@ public abstract class ConfigUtil {
 
     /**
      * Redirects the user back the the manage plugins page, with a 'configuration saved' message.
-     * 
-     * @param response          {@link HttpServletResponse} belonging to the current request.
-     * @throws IOException      if the redirect cannot be executed.
+     *
+     * @param response {@link HttpServletResponse} belonging to the current request.
+     *
+     * @throws IOException if the redirect cannot be executed.
      */
     public static void redirectUser(HttpServletResponse response) throws IOException {
         StringBuffer returnUrl = new StringBuffer("");

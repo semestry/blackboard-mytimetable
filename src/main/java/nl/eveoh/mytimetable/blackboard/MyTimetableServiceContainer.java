@@ -28,7 +28,6 @@ public class MyTimetableServiceContainer {
     private static final MyTimetableServiceImpl service = new MyTimetableServiceImpl(ConfigUtil.loadConfig());
 
 
-
     public static MyTimetableServiceImpl getService() {
         return service;
     }

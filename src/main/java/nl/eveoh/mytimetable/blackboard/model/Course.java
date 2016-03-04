@@ -36,8 +36,8 @@ public class Course implements Serializable {
     private Calendar endDate;
 
 
-
-    public Course() {}
+    public Course() {
+    }
 
     public Course(blackboard.data.course.Course bbCourse) {
         this.id = bbCourse.getCourseId();

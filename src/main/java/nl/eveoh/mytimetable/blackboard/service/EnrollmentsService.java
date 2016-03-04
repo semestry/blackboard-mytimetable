@@ -51,8 +51,8 @@ public class EnrollmentsService extends HttpServlet {
     private static final ObjectMapper mapper = new ObjectMapper();
 
 
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String username = request.getParameter("user");
         String token = request.getHeader("apiToken");
 
@@ -113,7 +113,8 @@ public class EnrollmentsService extends HttpServlet {
                 enrollment.setCourse(new Course(courseLoader.loadById(membership.getCourseId())));
             } catch (PersistenceException e) {
                 log.error("Error while loading courses for user.", e);
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while loading courses for user.");
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
+                        "Error while loading courses for user.");
                 return;
             }
 
