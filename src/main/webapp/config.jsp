@@ -94,7 +94,6 @@
                             name="defaultNumberOfEvents"
                             value="<%= configuration.getDefaultNumberOfEvents() %>"
                             min="1"
-                            max="<%= configuration.getMaxNumberOfEvents() %>"
                             />
 
                     <div class="error">${messages.numberOfEvents}</div>
