@@ -96,7 +96,7 @@
                             min="1"
                             />
 
-                    <div class="error">${messages.numberOfEvents}</div>
+                    <div class="error">${messages.defaultNumberOfEvents}</div>
                 </bbNG:dataElement>
 
                 <bbNG:dataElement label="Include activity type in overview" isRequired="true">
