@@ -90,6 +90,11 @@ public class ConfigService extends HttpServlet {
             messages.put("defaultNumberOfEvents", "Please enter a valid number.");
         }
 
+        if (defaultNumberOfEvents > numberOfEvents) {
+            messages.put("defaultNumberOfEvents",
+                    "Default number of events should be less than the maximum number of events.");
+        }
+
         String showActivityTypeString = request.getParameter("showActivityType");
         boolean showActivityType = showActivityTypeString != null && showActivityTypeString.equals("enable");
 

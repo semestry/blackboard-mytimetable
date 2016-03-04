@@ -94,10 +94,9 @@
                             name="defaultNumberOfEvents"
                             value="<%= configuration.getDefaultNumberOfEvents() %>"
                             min="1"
-                            max="<%= configuration.getMaxNumberOfEvents() %>"
                             />
 
-                    <div class="error">${messages.numberOfEvents}</div>
+                    <div class="error">${messages.defaultNumberOfEvents}</div>
                 </bbNG:dataElement>
 
                 <bbNG:dataElement label="Include activity type in overview" isRequired="true">
