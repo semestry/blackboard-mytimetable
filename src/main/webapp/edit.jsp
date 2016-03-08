@@ -26,7 +26,7 @@
         Integer numberOfActivities = null;
 
         try {
-            numberOfActivities = Integer.parseInt(cd.getValue("numberOfActivities");
+            numberOfActivities = Integer.parseInt(cd.getValue("numberOfActivities"));
         } catch (NumberFormatException ignored) {
         }
 
