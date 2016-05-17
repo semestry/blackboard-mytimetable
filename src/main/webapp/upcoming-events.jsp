@@ -115,27 +115,27 @@
             </div>
         </c:when>
         <c:otherwise>
-            <table class="eveoh-mytimetable-upcoming-events" cellpadding="0" cellspacing="0">
+            <table class="eveoh-mytimetable-upcoming-events" id="eveoh-mytimetable-event-table" cellpadding="0" cellspacing="0">
                 <thead>
-                <tr>
-                    <th class="eveoh-mytimetable-event">
-                        <fmt:message key="Header_Description" />
-                    </th>
-                    <c:if test="${configuration.showActivityType}">
-                        <th class="eveoh-mytimetable-type">
-                            <fmt:message key="Header_ActivityType" />
+                    <tr>
+                        <th class="eveoh-mytimetable-event" id="eveoh-mytimetable-description-header">
+                            <fmt:message key="Header_Description" />
                         </th>
-                    </c:if>
-                    <th class="eveoh-mytimetable-date">
-                        <fmt:message key="Header_Date" />
-                    </th>
-                    <th class="eveoh-mytimetable-time">
-                        <fmt:message key="Header_Time" />
-                    </th>
-                    <th class="eveoh-mytimetable-location">
-                        <fmt:message key="Header_Location" />
-                    </th>
-                </tr>
+                        <c:if test="${configuration.showActivityType}">
+                            <th class="eveoh-mytimetable-type" id="eveoh-mytimetable-type-header">
+                                <fmt:message key="Header_ActivityType" />
+                            </th>
+                        </c:if>
+                        <th class="eveoh-mytimetable-date">
+                            <fmt:message key="Header_Date" />
+                        </th>
+                        <th class="eveoh-mytimetable-time">
+                            <fmt:message key="Header_Time" />
+                        </th>
+                        <th class="eveoh-mytimetable-location">
+                            <fmt:message key="Header_Location" />
+                        </th>
+                    </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${upcomingEvents}" var="event">
@@ -186,6 +186,11 @@
         </a>
     </div>
 </div>
+
+<c:if test="${configuration.showActivityType}">
+    <%@ include file="upcoming-events-js.jsp" %>
+</c:if>
+
 <!--
 <% if (ex != null) {
     out.print(ex.toString());
