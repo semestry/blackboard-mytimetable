@@ -32,7 +32,7 @@ public class PersonalizationService extends HttpServlet {
 
         int numberOfActivities = Integer.parseInt(numberOfActivitiesString);
 
-        if (numberOfActivities < 0 || numberOfActivities > configuration.getMaxNumberOfEvents()) {
+        if (numberOfActivities < 1 || numberOfActivities > configuration.getMaxNumberOfEvents()) {
             numberOfActivities = configuration.getDefaultNumberOfEvents();
         }
 
