@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" %>
 <%@page import="
     blackboard.data.user.User,
+    blackboard.platform.intl.LocaleManagerFactory,
     blackboard.portal.external.CustomData,
     nl.eveoh.mytimetable.apiclient.configuration.WidgetConfiguration,
     nl.eveoh.mytimetable.apiclient.model.Event,
@@ -8,9 +9,9 @@
     nl.eveoh.mytimetable.blackboard.MyTimetableServiceContainer,
     org.slf4j.Logger,
     org.slf4j.LoggerFactory,
-    java.io.PrintWriter
+    java.io.PrintWriter,
+    java.util.List
 "%>
-<%@ page import="java.util.List" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -56,7 +57,8 @@
         log.debug("Logged in. Fetching upcoming events");
 
         try {
-            upcomingEvents = service.getUpcomingEvents(username);
+            upcomingEvents = service.getUpcomingEvents(username,
+                    LocaleManagerFactory.getInstance().getLocale().getLocaleObject());
             upcomingEvents = upcomingEvents.subList(0, Math.min(numberOfActivities, upcomingEvents.size()));
         } catch (Exception e) {
             ex = e;
