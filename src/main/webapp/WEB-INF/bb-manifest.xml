@@ -17,7 +17,7 @@
         </vendor>
 
         <http-actions>
-            <config value="/configService" />
+            <config value="configService" />
             <remove value="" />
         </http-actions>
 
