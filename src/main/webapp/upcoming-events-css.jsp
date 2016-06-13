@@ -67,4 +67,14 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location span {
     font-weight: bold;
     padding-bottom: 5px;
 }
+
+/* Hide type column when screen size is too small. */
+/* Breakpoint is based on the default 3-column layout of Blackboard, where this building block is loaded in on of the */
+/* larger columns. */
+@media only screen and (max-width: 1380px) {
+    table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-type {
+        display: none;
+    }
+}
+
 </style>
