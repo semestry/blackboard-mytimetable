@@ -1,5 +1,19 @@
 # Changelog
 
+## v2.1.3 (13 June 2016)
+
+* Show title for event description and type.
+* Retrieve API response in Blackboard locale.
+* Translated user settings page.
+* Fixed check on "number of activities to show" setting (could be 0).
+* Localised manifest.
+* Hide type column at a threshold value to allow for enough space for the description column.
+
+## v2.1.2 (8 March 2016)
+
+* Fixed number of activities validation in admin settings.
+* Fall back to default number of activities (set by admin) if an invalid number of activities is set by the user.
+
 ## v2.1.1 (24 February 2016)
 
 * Prevent IndexOutOfBoundsException when sublisting the number of activities to show.
