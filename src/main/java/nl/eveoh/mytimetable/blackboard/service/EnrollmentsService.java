@@ -81,7 +81,7 @@ public class EnrollmentsService extends HttpServlet {
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "User could not be found.");
             return;
         } catch (PersistenceException e) {
-            log.error("Error while loading user.", e);
+            log.error("Error while loading user " + username + ".", e);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while loading user.");
             return;
         }
@@ -91,7 +91,7 @@ public class EnrollmentsService extends HttpServlet {
             CourseMembershipDbLoader membershipLoader = CourseMembershipDbLoader.Default.getInstance();
             courseMemberships = membershipLoader.loadByUserId(user.getId());
         } catch (PersistenceException e) {
-            log.error("Error while loading courses for user.", e);
+            log.error("Error while loading course memberships for user " + username + "(" + user.getId() + ")" + ".", e);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while loading courses for user.");
             return;
         }
@@ -100,22 +100,24 @@ public class EnrollmentsService extends HttpServlet {
         try {
             courseLoader = CourseDbLoader.Default.getInstance();
         } catch (PersistenceException e) {
-            log.error("Error while loading courses for user.", e);
+            log.error("Error while getting courseLoader.", e);
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error while loading courses for user.");
             return;
         }
 
         List<Enrollment> enrollments = new ArrayList<Enrollment>();
         for (CourseMembership membership : courseMemberships) {
+            if (!membership.getIsAvailable()) {
+                continue;
+            }
+
             Enrollment enrollment = new Enrollment();
 
             try {
                 enrollment.setCourse(new Course(courseLoader.loadById(membership.getCourseId())));
             } catch (PersistenceException e) {
-                log.error("Error while loading courses for user.", e);
-                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                        "Error while loading courses for user.");
-                return;
+                log.info("Error while loading course " + membership.getId() + " for user " + username + ".", e);
+                continue;
             }
 
             enrollment.setEnrollmentDate((Calendar) membership.getEnrollmentDate().clone());
