@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.4 (7 September 2016)
+
+* Skip and ignore non-existent courses and unavailable course memberships in EnrollmentsService.
+* Improved logging in EnrollmentsService.
+
 ## v2.1.3 (13 June 2016)
 
 * Show title for event description and type.
