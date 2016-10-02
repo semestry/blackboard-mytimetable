@@ -123,11 +123,6 @@
                     <th class="eveoh-mytimetable-event">
                         <fmt:message key="Header_Description" />
                     </th>
-                    <c:if test="${configuration.showActivityType}">
-                        <th class="eveoh-mytimetable-type">
-                            <fmt:message key="Header_ActivityType" />
-                        </th>
-                    </c:if>
                     <th class="eveoh-mytimetable-date">
                         <fmt:message key="Header_Date" />
                     </th>
@@ -137,6 +132,11 @@
                     <th class="eveoh-mytimetable-location">
                         <fmt:message key="Header_Location" />
                     </th>
+                    <c:if test="${configuration.showActivityType}">
+                        <th class="eveoh-mytimetable-type">
+                            <fmt:message key="Header_ActivityType" />
+                        </th>
+                    </c:if>
                 </tr>
                 </thead>
                 <tbody>
@@ -145,11 +145,6 @@
                         <td class="eveoh-mytimetable-event">
                             <span title="${event.activityDescription}"><c:out value="${event.activityDescription}" /></span>
                         </td>
-                        <c:if test="${configuration.showActivityType}">
-                        <td class="eveoh-mytimetable-type">
-                            <span title="${event.activityType}"><c:out value="${event.activityType}" /></span>
-                        </td>
-                        </c:if>
                         <td class="eveoh-mytimetable-date">
                             <fmt:formatDate pattern="dd-MM" value="${event.startDate}" />
                         </td>
@@ -175,6 +170,11 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
+                        <c:if test="${configuration.showActivityType}">
+                            <td class="eveoh-mytimetable-type">
+                                <span title="${event.activityType}"><c:out value="${event.activityType}" /></span>
+                            </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
                 </tbody>

@@ -10,26 +10,23 @@
 table.eveoh-mytimetable-upcoming-events {
     width: 100%;
     margin-bottom: 5px;
-    table-layout: fixed;
-    white-space: nowrap;
 }
 
 table.eveoh-mytimetable-upcoming-events th,
 table.eveoh-mytimetable-upcoming-events td {
     padding: 5px;
+    vertical-align: top;
 }
 
 table.eveoh-mytimetable-upcoming-events th {
     font-weight: bold;
     border-bottom: 1px solid #ccc;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
+    word-break: break-all;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
     padding-left: 0;
+    min-width: 100px;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-type {
@@ -49,18 +46,14 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-time {
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location {
     width: 30%;
-    min-width: 30%;
+    min-width: 100px;
     padding-right: 0;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event span,
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-type span,
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    -o-text-overflow: ellipsis;
-    -ms-text-overflow: ellipsis;
-    display: block;
+    word-break: break-all;
 }
 
 .eveoh-mytimetable-error-header {
