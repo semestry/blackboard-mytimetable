@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.5 (4 August 2017)
+
+* Upgraded MyTimetable API client to support SNI
+
 ## v2.1.4 (7 September 2016)
 
 * Skip and ignore non-existent courses and unavailable course memberships in EnrollmentsService.
