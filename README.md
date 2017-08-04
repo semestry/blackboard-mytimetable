@@ -30,6 +30,7 @@ Various settings can be found under the building block settings page:
 
 * __MyTimetable URL__: URL to your MyTimetable installation, used in the interface to link to the full timetable. Add `?requireLogin=true` to automatically trigger authentication.
 * __MyTimetable link target__: defines if the building block is loaded in a new window (`_blank`) or in the current window (`_top`).
+* __MyTimetable link description__: if set, overrides the link text to your MyTimetable installation.
 * __Maximum number of events to show__: maximum number of upcoming events shown in the building block.
 * __Default number of events to show__: default number of upcoming events shown in the building block (can be set by the user).
 * __Include activity type in overview__: display activity type column in the building block.
@@ -109,7 +110,7 @@ Visit our website, http://mytimetable.net, open a ticket (PR's welcome), or drop
 
 ## License
 
-    Copyright 2013 - 2014 Eveoh
+    Copyright 2013 - 2017 Eveoh
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
