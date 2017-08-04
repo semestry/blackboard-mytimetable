@@ -3,6 +3,7 @@
 ## v2.1.5 (4 August 2017)
 
 * Upgraded MyTimetable API client to support SNI
+* Add support to override the MyTimetable link description
 
 ## v2.1.4 (7 September 2016)
 

@@ -79,6 +79,14 @@
                     <div class="error">${messages.applicationTarget}</div>
                 </bbNG:dataElement>
 
+                <bbNG:dataElement label="MyTimetable link description (overrides default)" isRequired="false">
+                    <input
+                            type="text"
+                            name="applicationUriDescriptionOverride"
+                            value="${fn:escapeXml(configuration.applicationUriDescriptionOverride)}"
+                            size="100" />
+                </bbNG:dataElement>
+
                 <bbNG:dataElement label="Maximum number of events to show" isRequired="true">
                     <input
                             type="number"

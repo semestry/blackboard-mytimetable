@@ -184,7 +184,14 @@
 
     <div id="eveoh-mytimetable-application" class="moduleControlWrapper u_reverseAlign">
         <a class="button-6" href="<c:url value="${configuration.applicationUri}" />" target="<c:out value="${configuration.applicationTarget}" />">
-            <fmt:message key="GoToTimetableApplication" />
+            <c:choose>
+                <c:when test="${not empty configuration.applicationUriDescriptionOverride}">
+                    <c:out value="${configuration.applicationUriDescriptionOverride}" />
+                </c:when>
+                <c:otherwise>
+                    <fmt:message key="GoToTimetableApplication" />
+                </c:otherwise>
+            </c:choose>
         </a>
     </div>
 </div>
