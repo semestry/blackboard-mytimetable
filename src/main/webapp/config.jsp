@@ -195,6 +195,13 @@
 
                     <div class="error">${messages.apiMaxConnections}</div>
                 </bbNG:dataElement>
+
+                <bbNG:dataElement label="Use student ID instead of username" isRequired="true">
+                    <input
+                            type="checkbox"
+                            name="useStudentId"
+                            value="enable"  <c:if test="${configuration.useStudentId}">checked="checked" </c:if>/>
+                </bbNG:dataElement>
             </bbNG:step>
 
             <bbNG:step title="Domain configuration" instructions="Configure domain specific settings for the MyTimetable API.">

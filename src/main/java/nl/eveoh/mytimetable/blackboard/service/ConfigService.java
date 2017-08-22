@@ -150,6 +150,9 @@ public class ConfigService extends HttpServlet {
             messages.put("apiMaxConnections", "Please enter a valid number.");
         }
 
+        String useStudentIdString = request.getParameter("useStudentId");
+        boolean useStudentId = useStudentIdString != null && useStudentIdString.equals("enable");
+
         String usernameDomainPrefix = request.getParameter("usernameDomainPrefix");
         if (StringUtils.isBlank(usernameDomainPrefix)) {
             usernameDomainPrefix = null;
@@ -180,8 +183,8 @@ public class ConfigService extends HttpServlet {
             try {
                 saveConfig(applicationUri, selectedTarget, applicationUriDescriptionOverride, numberOfEvents,
                         defaultNumberOfEvents, showActivityType, showStaff, apiEndpointUris, apiKey, apiSslCnCheck,
-                        apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix,
-                        customCss, timetableTypes, unknownLocationDescription);
+                        apiConnectTimeout, apiSocketTimeout, apiMaxConnections, useStudentId, usernameDomainPrefix,
+                        usernamePostfix, customCss, timetableTypes, unknownLocationDescription);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -198,7 +201,7 @@ public class ConfigService extends HttpServlet {
     private void saveConfig(String applicationUri, String selectedTarget, String applicationUriDescriptionOverride,
                             int maxNumberOfEvents, int defaultNumberOfEvents, boolean showActivityType, boolean showStaff,
                             ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
-                            int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
+                            int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections, boolean useStudentId,
                             String usernameDomainPrefix, String usernamePostfix, String customCss,
                             String timetableTypesStr, String unknownLocationDescription) {
         try {
@@ -216,6 +219,7 @@ public class ConfigService extends HttpServlet {
             configuration.setApiConnectTimeout(apiConnectTimeout);
             configuration.setApiSocketTimeout(apiSocketTimeout);
             configuration.setApiMaxConnections(apiMaxConnections);
+            configuration.setUseStudentId(useStudentId);
             configuration.setUsernameDomainPrefix(usernameDomainPrefix);
             configuration.setUsernamePostfix(usernamePostfix);
             configuration.setCustomCss(customCss);

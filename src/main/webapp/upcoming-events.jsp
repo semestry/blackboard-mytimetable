@@ -44,7 +44,13 @@
 
     if (ctx.hasUserContext()) {
         User user = ctx.getUser();
-        username = user.getUserName();
+
+        if (configuration.isUseStudentId()) {
+            username = user.getStudentId();
+        } else {
+            username = user.getUserName();
+        }
+
         User.SystemRole role = user.getSystemRole();
         isLoggedIn = role != User.SystemRole.GUEST;
     }
