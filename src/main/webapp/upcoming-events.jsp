@@ -137,6 +137,9 @@
                     <th class="eveoh-mytimetable-location">
                         <fmt:message key="Header_Location" />
                     </th>
+                    <th class="eveoh-mytimetable-staff">
+                        <fmt:message key="Header_Staff" />
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -171,6 +174,18 @@
                                 <c:otherwise>
                                     <span title="<c:forEach items="${event.locations}" var="l" varStatus="status"><c:if test="${status.index > 0}">&#13;</c:if><c:out value="${l.name}" /></c:forEach>">
                                         <c:forEach items="${event.locations}" var="l" varStatus="status"><c:if test="${status.index > 0}">, </c:if><c:out value="${l.name}" /></c:forEach>
+                                    </span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td class="eveoh-mytimetable-staff">
+                            <c:choose>
+                                <c:when test="${empty event.staffMembers}">
+                                    -
+                                </c:when>
+                                <c:otherwise>
+                                    <span title="<c:forEach items="${event.staffMembers}" var="s" varStatus="status"><c:if test="${status.index > 0}">&#13;</c:if><c:out value="${s}" /></c:forEach>">
+                                        <c:forEach items="${event.staffMembers}" var="s" varStatus="status"><c:if test="${status.index > 0}">, </c:if><c:out value="${s}" /></c:forEach>
                                     </span>
                                 </c:otherwise>
                             </c:choose>
