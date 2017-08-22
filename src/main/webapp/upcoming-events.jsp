@@ -137,9 +137,11 @@
                     <th class="eveoh-mytimetable-location">
                         <fmt:message key="Header_Location" />
                     </th>
+                    <c:if test="${configuration.showStaff}">
                     <th class="eveoh-mytimetable-staff">
                         <fmt:message key="Header_Staff" />
                     </th>
+                    </c:if>
                 </tr>
                 </thead>
                 <tbody>
@@ -178,6 +180,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
+                        <c:if test="${configuration.showStaff}">
                         <td class="eveoh-mytimetable-staff">
                             <c:choose>
                                 <c:when test="${empty event.staffMembers}">
@@ -190,6 +193,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
+                        </c:if>
                     </tr>
                 </c:forEach>
                 </tbody>

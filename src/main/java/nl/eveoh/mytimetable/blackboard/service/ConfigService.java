@@ -103,6 +103,9 @@ public class ConfigService extends HttpServlet {
         String showActivityTypeString = request.getParameter("showActivityType");
         boolean showActivityType = showActivityTypeString != null && showActivityTypeString.equals("enable");
 
+        String showStaffString = request.getParameter("showStaff");
+        boolean showStaff = showStaffString != null && showStaffString.equals("enable");
+
         ArrayList<String> apiEndpointUris = new ArrayList<String>();
         String apiEndpointUrisString = request.getParameter("apiEndpointUris");
         if (StringUtils.isBlank(apiEndpointUrisString)) {
@@ -176,7 +179,7 @@ public class ConfigService extends HttpServlet {
 
             try {
                 saveConfig(applicationUri, selectedTarget, applicationUriDescriptionOverride, numberOfEvents,
-                        defaultNumberOfEvents, showActivityType, apiEndpointUris, apiKey, apiSslCnCheck,
+                        defaultNumberOfEvents, showActivityType, showStaff, apiEndpointUris, apiKey, apiSslCnCheck,
                         apiConnectTimeout, apiSocketTimeout, apiMaxConnections, usernameDomainPrefix, usernamePostfix,
                         customCss, timetableTypes, unknownLocationDescription);
             } catch (ConfigurationPersistenceException e) {
@@ -193,7 +196,7 @@ public class ConfigService extends HttpServlet {
     }
 
     private void saveConfig(String applicationUri, String selectedTarget, String applicationUriDescriptionOverride,
-                            int maxNumberOfEvents, int defaultNumberOfEvents, boolean showActivityType,
+                            int maxNumberOfEvents, int defaultNumberOfEvents, boolean showActivityType, boolean showStaff,
                             ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
                             int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
                             String usernameDomainPrefix, String usernamePostfix, String customCss,
@@ -206,6 +209,7 @@ public class ConfigService extends HttpServlet {
             configuration.setMaxNumberOfEvents(maxNumberOfEvents);
             configuration.setDefaultNumberOfEvents(defaultNumberOfEvents);
             configuration.setShowActivityType(showActivityType);
+            configuration.setShowStaff(showStaff);
             configuration.setApiEndpointUris(apiEndpointUris);
             configuration.setApiKey(apiKey);
             configuration.setApiSslCnCheck(apiSslCnCheck);

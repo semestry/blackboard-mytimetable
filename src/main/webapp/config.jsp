@@ -114,6 +114,13 @@
                             value="enable"  <c:if test="${configuration.showActivityType}">checked="checked" </c:if>/>
                 </bbNG:dataElement>
 
+                <bbNG:dataElement label="Include staff in overview" isRequired="true">
+                    <input
+                            type="checkbox"
+                            name="showStaff"
+                            value="enable"  <c:if test="${configuration.showStaff}">checked="checked" </c:if>/>
+                </bbNG:dataElement>
+
                 <bbNG:dataElement label="Unknown location description" isRequired="false">
                     <input
                             type="text"
