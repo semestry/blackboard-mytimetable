@@ -34,6 +34,7 @@ Various settings can be found under the building block settings page:
 * __Maximum number of events to show__: maximum number of upcoming events shown in the building block.
 * __Default number of events to show__: default number of upcoming events shown in the building block (can be set by the user).
 * __Include activity type in overview__: display activity type column in the building block.
+* __Include staff in overview__: display staff column in the building block.
 * __Unknown location description__: Description shown when no location is assigned to an activity.
 
 ### API connection configuration
@@ -44,6 +45,7 @@ Various settings can be found under the building block settings page:
 * __Disable SSL certificate CN verification__: Tick this box to disable the strict hostname checks and allow any hostname in the certificate. Useful when the connection is made using an internal hostname. The SSL certificate still has to be valid.
 * __Timeout settings__: define various timeouts.
 * __Maximum number of concurrent API connections__: Maximum number of concurrent connections made to the API. Do not make this number too high, to prevent MyTimetable server overload.
+* __Use student ID instead of username__: Use the Blackboard Student ID instead of the Blackboard username. Domain configuration settings below still apply. 
 
 ### Domain configuration
 
