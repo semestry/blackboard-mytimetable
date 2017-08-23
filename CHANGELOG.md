@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.8 (23 August 2017)
+
+* Fixed loading of configuration settings
+
 ## v2.1.7 (23 August 2017)
 
 * Add code field
