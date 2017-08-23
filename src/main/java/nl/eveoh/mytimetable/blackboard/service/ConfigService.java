@@ -103,8 +103,23 @@ public class ConfigService extends HttpServlet {
         String showActivityTypeString = request.getParameter("showActivityType");
         boolean showActivityType = showActivityTypeString != null && showActivityTypeString.equals("enable");
 
+        String showCodeString = request.getParameter("showCode");
+        boolean showCode = showCodeString != null && showCodeString.equals("enable");
+
+        String showDescriptionString = request.getParameter("showDescription");
+        boolean showDescription = showDescriptionString != null && showDescriptionString.equals("enable");
+
         String showStaffString = request.getParameter("showStaff");
         boolean showStaff = showStaffString != null && showStaffString.equals("enable");
+
+        String showNote1String = request.getParameter("showNote1");
+        boolean showNote1 = showNote1String != null && showNote1String.equals("enable");
+
+        String showNote2String = request.getParameter("showNote2");
+        boolean showNote2 = showNote2String != null && showNote2String.equals("enable");
+
+        String showNote3String = request.getParameter("showNote3");
+        boolean showNote3 = showNote3String != null && showNote3String.equals("enable");
 
         ArrayList<String> apiEndpointUris = new ArrayList<String>();
         String apiEndpointUrisString = request.getParameter("apiEndpointUris");
@@ -182,9 +197,10 @@ public class ConfigService extends HttpServlet {
 
             try {
                 saveConfig(applicationUri, selectedTarget, applicationUriDescriptionOverride, numberOfEvents,
-                        defaultNumberOfEvents, showActivityType, showStaff, apiEndpointUris, apiKey, apiSslCnCheck,
-                        apiConnectTimeout, apiSocketTimeout, apiMaxConnections, useStudentId, usernameDomainPrefix,
-                        usernamePostfix, customCss, timetableTypes, unknownLocationDescription);
+                        defaultNumberOfEvents, showActivityType, showCode, showDescription, showStaff, showNote1,
+                        showNote2, showNote3, apiEndpointUris, apiKey, apiSslCnCheck, apiConnectTimeout,
+                        apiSocketTimeout, apiMaxConnections, useStudentId, usernameDomainPrefix, usernamePostfix,
+                        customCss, timetableTypes, unknownLocationDescription);
             } catch (ConfigurationPersistenceException e) {
                 log.error("Something went wrong with saving the preferences", e);
 
@@ -199,10 +215,11 @@ public class ConfigService extends HttpServlet {
     }
 
     private void saveConfig(String applicationUri, String selectedTarget, String applicationUriDescriptionOverride,
-                            int maxNumberOfEvents, int defaultNumberOfEvents, boolean showActivityType, boolean showStaff,
-                            ArrayList<String> apiEndpointUris, String apiKey, boolean apiSslCnCheck,
-                            int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections, boolean useStudentId,
-                            String usernameDomainPrefix, String usernamePostfix, String customCss,
+                            int maxNumberOfEvents, int defaultNumberOfEvents, boolean showActivityType,
+                            boolean showCode, boolean showDescription, boolean showStaff, boolean showNote1,
+                            boolean showNote2, boolean showNote3, ArrayList<String> apiEndpointUris, String apiKey,
+                            boolean apiSslCnCheck, int apiConnectTimeout, int apiSocketTimeout, int apiMaxConnections,
+                            boolean useStudentId, String usernameDomainPrefix, String usernamePostfix, String customCss,
                             String timetableTypesStr, String unknownLocationDescription) {
         try {
             WidgetConfiguration configuration = ConfigUtil.loadConfig();
@@ -212,7 +229,12 @@ public class ConfigService extends HttpServlet {
             configuration.setMaxNumberOfEvents(maxNumberOfEvents);
             configuration.setDefaultNumberOfEvents(defaultNumberOfEvents);
             configuration.setShowActivityType(showActivityType);
+            configuration.setShowCode(showCode);
+            configuration.setShowDescription(showDescription);
             configuration.setShowStaff(showStaff);
+            configuration.setShowNote1(showNote1);
+            configuration.setShowNote2(showNote2);
+            configuration.setShowNote3(showNote3);
             configuration.setApiEndpointUris(apiEndpointUris);
             configuration.setApiKey(apiKey);
             configuration.setApiSslCnCheck(apiSslCnCheck);

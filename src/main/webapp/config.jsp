@@ -107,18 +107,53 @@
                     <div class="error">${messages.defaultNumberOfEvents}</div>
                 </bbNG:dataElement>
 
-                <bbNG:dataElement label="Include activity type in overview" isRequired="true">
+                <bbNG:dataElement label="Show activity code" isRequired="true">
+                    <input
+                            type="checkbox"
+                            name="showCode"
+                            value="enable"  <c:if test="${configuration.showCode}">checked="checked" </c:if>/>
+                </bbNG:dataElement>
+
+                <bbNG:dataElement label="Show activity description" isRequired="true">
+                    <input
+                            type="checkbox"
+                            name="showDescription"
+                            value="enable"  <c:if test="${configuration.showDescription}">checked="checked" </c:if>/>
+                </bbNG:dataElement>
+
+                <bbNG:dataElement label="Show staff" isRequired="true">
+                    <input
+                            type="checkbox"
+                            name="showStaff"
+                            value="enable"  <c:if test="${configuration.showStaff}">checked="checked" </c:if>/>
+                </bbNG:dataElement>
+
+                <bbNG:dataElement label="Show activity type" isRequired="true">
                     <input
                             type="checkbox"
                             name="showActivityType"
                             value="enable"  <c:if test="${configuration.showActivityType}">checked="checked" </c:if>/>
                 </bbNG:dataElement>
 
-                <bbNG:dataElement label="Include staff in overview" isRequired="true">
+                <bbNG:dataElement label="Show note 1" isRequired="true">
                     <input
                             type="checkbox"
-                            name="showStaff"
-                            value="enable"  <c:if test="${configuration.showStaff}">checked="checked" </c:if>/>
+                            name="showNote1"
+                            value="enable"  <c:if test="${configuration.showNote1}">checked="checked" </c:if>/>
+                </bbNG:dataElement>
+
+                <bbNG:dataElement label="Show note 2" isRequired="true">
+                    <input
+                            type="checkbox"
+                            name="showNote2"
+                            value="enable"  <c:if test="${configuration.showNote2}">checked="checked" </c:if>/>
+                </bbNG:dataElement>
+
+                <bbNG:dataElement label="Show note 3" isRequired="true">
+                    <input
+                            type="checkbox"
+                            name="showNote3"
+                            value="enable"  <c:if test="${configuration.showNote3}">checked="checked" </c:if>/>
                 </bbNG:dataElement>
 
                 <bbNG:dataElement label="Unknown location description" isRequired="false">
@@ -127,7 +162,6 @@
                             name="unknownLocationDescription"
                             value="${fn:escapeXml(configuration.unknownLocationDescription)}"
                             size="100" />
-
                 </bbNG:dataElement>
             </bbNG:step>
 

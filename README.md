@@ -33,8 +33,13 @@ Various settings can be found under the building block settings page:
 * __MyTimetable link description__: if set, overrides the link text to your MyTimetable installation.
 * __Maximum number of events to show__: maximum number of upcoming events shown in the building block.
 * __Default number of events to show__: default number of upcoming events shown in the building block (can be set by the user).
-* __Include activity type in overview__: display activity type column in the building block.
-* __Include staff in overview__: display staff column in the building block.
+* __Show activity code__: display activity code in the description column in the building block.
+* __Show activity description__: display activity description in the description column in the building block.
+* __Show staff__: display staff column in the building block.
+* __Show activity type__: display activity type column in the building block.
+* __Show note 1__: display note 1 in the description column in the building block.
+* __Show note 2__: display note 2 in the description column in the building block.
+* __Show note 3__: display note 3 in the description column in the building block.
 * __Unknown location description__: Description shown when no location is assigned to an activity.
 
 ### API connection configuration

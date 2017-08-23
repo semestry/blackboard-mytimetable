@@ -70,6 +70,10 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-staff span {
     display: block;
 }
 
+table.eveoh-mytimetable-upcoming-events span.inline {
+    display: inline;
+}
+
 .eveoh-mytimetable-error-header {
     font-weight: bold;
     padding-bottom: 5px;

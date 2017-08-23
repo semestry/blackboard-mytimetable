@@ -126,23 +126,30 @@
             <table class="eveoh-mytimetable-upcoming-events" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
-                    <th class="eveoh-mytimetable-event">
-                        <fmt:message key="Header_Description" />
-                    </th>
+                    <c:if test="${configuration.showCode or configuration.showDescription}">
+                        <th class="eveoh-mytimetable-event">
+                            <fmt:message key="Header_Description" />
+                        </th>
+                    </c:if>
+
                     <c:if test="${configuration.showActivityType}">
                         <th class="eveoh-mytimetable-type">
                             <fmt:message key="Header_ActivityType" />
                         </th>
                     </c:if>
+
                     <th class="eveoh-mytimetable-date">
                         <fmt:message key="Header_Date" />
                     </th>
+
                     <th class="eveoh-mytimetable-time">
                         <fmt:message key="Header_Time" />
                     </th>
+
                     <th class="eveoh-mytimetable-location">
                         <fmt:message key="Header_Location" />
                     </th>
+
                     <c:if test="${configuration.showStaff}">
                     <th class="eveoh-mytimetable-staff">
                         <fmt:message key="Header_Staff" />
@@ -153,20 +160,62 @@
                 <tbody>
                 <c:forEach items="${upcomingEvents}" var="event">
                     <tr>
-                        <td class="eveoh-mytimetable-event">
-                            <span title="${event.activityDescription}"><c:out value="${event.activityDescription}" /></span>
-                        </td>
-                        <c:if test="${configuration.showActivityType}">
-                        <td class="eveoh-mytimetable-type">
-                            <span title="${event.activityType}"><c:out value="${event.activityType}" /></span>
-                        </td>
+                        <c:if test="${configuration.showCode or configuration.showDescription}">
+                            <td class="eveoh-mytimetable-event">
+                                <span>
+                                    <c:if test="${configuration.showCode}">
+                                        <span title="${event.activityCode}" class="inline">
+                                            <c:out value="${event.activityCode}" />
+                                        </span>
+
+                                        <c:if test="${configuration.showDescription}">-</c:if>
+                                    </c:if>
+                                    <c:if test="${configuration.showDescription}">
+                                        <span title="${event.activityDescription}" class="inline">
+                                            <c:out value="${event.activityDescription}" />
+                                        </span>
+                                    </c:if>
+
+                                    <c:if test="${configuration.showNote1 and not empty event.note1}">
+                                        <br />
+                                        <span title="${event.note1}" class="inline">
+                                            <em><c:out value="${event.note1}" /></em>
+                                        </span>
+                                    </c:if>
+
+                                    <c:if test="${configuration.showNote2 and not empty event.note2}">
+                                        <br />
+                                        <span title="${event.note2}" class="inline">
+                                            <em><c:out value="${event.note2}" /></em>
+                                        </span>
+                                    </c:if>
+
+                                    <c:if test="${configuration.showNote3 and not empty event.note3}">
+                                        <br />
+                                        <span title="${event.note3}" class="inline">
+                                            <em><c:out value="${event.note3}" /></em>
+                                        </span>
+                                    </c:if>
+                                </span>
+                            </td>
                         </c:if>
+
+                        <c:if test="${configuration.showActivityType}">
+                            <td class="eveoh-mytimetable-type">
+                                <span title="${event.activityType}">
+                                    <c:out value="${event.activityType}" />
+                                </span>
+                            </td>
+                        </c:if>
+
                         <td class="eveoh-mytimetable-date">
                             <fmt:formatDate pattern="dd-MM" value="${event.startDate}" />
                         </td>
+
                         <td class="eveoh-mytimetable-time">
                             <fmt:formatDate pattern="HH:mm" value="${event.startDate}" /> - <fmt:formatDate pattern="HH:mm" value="${event.endDate}" />
                         </td>
+
                         <td class="eveoh-mytimetable-location">
                             <c:choose>
                                 <c:when test="${empty event.locations}">
@@ -186,6 +235,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
+
                         <c:if test="${configuration.showStaff}">
                         <td class="eveoh-mytimetable-staff">
                             <c:choose>
