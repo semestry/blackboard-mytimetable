@@ -1,5 +1,18 @@
 # Changelog
 
+## v2.1.7 (23 August 2017)
+
+* Add code field
+* Add note fields
+* Make showing code, description and note fields optional
+
+## v2.1.6 (22 August 2017)
+
+* Rename "Location" to "Location(s)"
+* Add staff column
+* Make showing staff optional
+* Added option to use Blackboard StudentID instead of Blackboard username to retrieve timetables 
+ 
 ## v2.1.5 (4 August 2017)
 
 * Upgraded MyTimetable API client to support SNI
