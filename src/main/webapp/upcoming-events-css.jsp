@@ -84,13 +84,8 @@ table.eveoh-mytimetable-upcoming-events span.inline {
 /* Hide type column when screen size is too small. */
 /* Breakpoint is based on the default 3-column layout of Blackboard, where this building block is loaded in one of the */
 /* larger columns. */
-@media only screen and (max-width: 768px) {
-    table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-time {
-        width: 40px;
-        min-width: 40px;
-    }
-
-    table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-time-end {
+@media only screen and (max-width: 1920px) {
+    table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-staff {
         display: none;
     }
 }
@@ -101,8 +96,13 @@ table.eveoh-mytimetable-upcoming-events span.inline {
     }
 }
 
-@media only screen and (max-width: 1920px) {
-    table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-staff {
+@media only screen and (max-width: 768px) {
+    table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-time {
+        width: 40px;
+        min-width: 40px;
+    }
+
+    table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-time-end {
         display: none;
     }
 }
