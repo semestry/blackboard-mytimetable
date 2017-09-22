@@ -126,6 +126,14 @@
             <table class="eveoh-mytimetable-upcoming-events" cellpadding="0" cellspacing="0">
                 <thead>
                 <tr>
+                    <th class="eveoh-mytimetable-date">
+                        <fmt:message key="Header_Date" />
+                    </th>
+
+                    <th class="eveoh-mytimetable-time">
+                        <fmt:message key="Header_Time" />
+                    </th>
+
                     <c:if test="${configuration.showCode}">
                         <th class="eveoh-mytimetable-code">
                             <fmt:message key="Header_Code" />
@@ -144,14 +152,6 @@
                         </th>
                     </c:if>
 
-                    <th class="eveoh-mytimetable-date">
-                        <fmt:message key="Header_Date" />
-                    </th>
-
-                    <th class="eveoh-mytimetable-time">
-                        <fmt:message key="Header_Time" />
-                    </th>
-
                     <th class="eveoh-mytimetable-location">
                         <fmt:message key="Header_Location" />
                     </th>
@@ -166,6 +166,14 @@
                 <tbody>
                 <c:forEach items="${upcomingEvents}" var="event">
                     <tr>
+                        <td class="eveoh-mytimetable-date">
+                            <fmt:formatDate pattern="dd-MM" value="${event.startDate}" />
+                        </td>
+
+                        <td class="eveoh-mytimetable-time">
+                            <fmt:formatDate pattern="HH:mm" value="${event.startDate}" /> - <fmt:formatDate pattern="HH:mm" value="${event.endDate}" />
+                        </td>
+
                         <c:if test="${configuration.showCode}">
                             <td class="eveoh-mytimetable-code">
                                 <span>
@@ -216,14 +224,6 @@
                                 </span>
                             </td>
                         </c:if>
-
-                        <td class="eveoh-mytimetable-date">
-                            <fmt:formatDate pattern="dd-MM" value="${event.startDate}" />
-                        </td>
-
-                        <td class="eveoh-mytimetable-time">
-                            <fmt:formatDate pattern="HH:mm" value="${event.startDate}" /> - <fmt:formatDate pattern="HH:mm" value="${event.endDate}" />
-                        </td>
 
                         <td class="eveoh-mytimetable-location">
                             <c:choose>
