@@ -33,7 +33,7 @@ table.eveoh-mytimetable-upcoming-events th {
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-code {
-    width: 120px;
+    width: 115px;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
@@ -50,8 +50,8 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-date {
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-time {
-    width: 80px;
-    min-width: 80px;
+    width: 90px;
+    min-width: 90px;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location {
