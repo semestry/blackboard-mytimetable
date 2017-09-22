@@ -33,11 +33,10 @@ table.eveoh-mytimetable-upcoming-events th {
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-code {
-    padding-left: 0;
+    width: 120px;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
-    padding-left: 0;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-type {
@@ -56,11 +55,9 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-time {
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location {
-    padding-right: 0;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-staff {
-    padding-right: 0;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-code span,
@@ -98,5 +95,4 @@ table.eveoh-mytimetable-upcoming-events span.inline {
         display: none;
     }
 }
-
 </style>
