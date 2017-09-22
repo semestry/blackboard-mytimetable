@@ -40,8 +40,8 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-type {
-    width: 60px;
-    min-width: 60px;
+    width: 70px;
+    min-width: 70px;
 }
 
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-date {
