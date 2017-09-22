@@ -90,7 +90,7 @@ table.eveoh-mytimetable-upcoming-events span.inline {
     }
 }
 
-@media only screen and (max-width: 1660px) {
+@media only screen and (max-width: 1920px) {
     table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-staff {
         display: none;
     }
