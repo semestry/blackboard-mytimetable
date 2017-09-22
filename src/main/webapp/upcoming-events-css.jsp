@@ -36,6 +36,10 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-code {
     width: 115px;
 }
 
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-code .eveoh-mytimetable-code-notes {
+    display: none;
+}
+
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
 }
 

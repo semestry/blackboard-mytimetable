@@ -185,17 +185,8 @@
                                             <c:out value="${event.activityCode}" />
                                         </span>
                                     </c:if>
-                                </span>
-                            </td>
-                        </c:if>
 
-                        <c:if test="${configuration.showDescription}">
-                            <td class="eveoh-mytimetable-event">
-                                <span>
-                                    <span title="${event.activityDescription}" class="inline">
-                                        <c:out value="${event.activityDescription}" />
-                                    </span>
-
+                                    <span class="eveoh-mytimetable-code-notes inline">
                                     <c:if test="${configuration.showNote1 and not empty event.note1}">
                                         <br />
                                         <span title="${event.note1}" class="inline">
@@ -216,6 +207,40 @@
                                             <em><c:out value="${event.note3}" /></em>
                                         </span>
                                     </c:if>
+                                    </span>
+                                </span>
+                            </td>
+                        </c:if>
+
+                        <c:if test="${configuration.showDescription}">
+                            <td class="eveoh-mytimetable-event">
+                                <span>
+                                    <span title="${event.activityDescription}" class="inline">
+                                        <c:out value="${event.activityDescription}" />
+                                    </span>
+
+                                    <span class="eveoh-mytimetable-event-notes inline">
+                                    <c:if test="${configuration.showNote1 and not empty event.note1}">
+                                        <br />
+                                        <span title="${event.note1}" class="inline">
+                                            <em><c:out value="${event.note1}" /></em>
+                                        </span>
+                                    </c:if>
+
+                                    <c:if test="${configuration.showNote2 and not empty event.note2}">
+                                        <br />
+                                        <span title="${event.note2}" class="inline">
+                                            <em><c:out value="${event.note2}" /></em>
+                                        </span>
+                                    </c:if>
+
+                                    <c:if test="${configuration.showNote3 and not empty event.note3}">
+                                        <br />
+                                        <span title="${event.note3}" class="inline">
+                                            <em><c:out value="${event.note3}" /></em>
+                                        </span>
+                                    </c:if>
+                                    </span>
                                 </span>
                             </td>
                         </c:if>
