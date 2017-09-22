@@ -93,6 +93,8 @@
 
 <%@ include file="upcoming-events-css.jsp" %>
 
+<%@ include file="upcoming-events-css-customer.jsp" %>
+
 <c:if test="${not empty configuration.customCss}">
 <style>
     <c:out escapeXml="false" value="${configuration.customCss}" />
