@@ -171,7 +171,10 @@
                         </td>
 
                         <td class="eveoh-mytimetable-time">
-                            <fmt:formatDate pattern="HH:mm" value="${event.startDate}" /> - <fmt:formatDate pattern="HH:mm" value="${event.endDate}" />
+                            <fmt:formatDate pattern="HH:mm" value="${event.startDate}" />
+                            <span class="eveoh-mytimetable-time-end">
+                                - <fmt:formatDate pattern="HH:mm" value="${event.endDate}" />
+                            </span>
                         </td>
 
                         <c:if test="${configuration.showCode}">
