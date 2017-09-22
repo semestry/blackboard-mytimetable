@@ -32,6 +32,10 @@ table.eveoh-mytimetable-upcoming-events th {
     -ms-text-overflow: ellipsis;
 }
 
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-code {
+    padding-left: 0;
+}
+
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event {
     padding-left: 0;
 }
@@ -59,6 +63,7 @@ table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-staff {
     padding-right: 0;
 }
 
+table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-code span,
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-event span,
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-type span,
 table.eveoh-mytimetable-upcoming-events .eveoh-mytimetable-location span,
