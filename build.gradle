@@ -1,7 +1,7 @@
 apply plugin: 'war'
 
 group = 'nl.eveoh.mytimetable'
-version = '2.1.8'
+version = '2.1.9-uol'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
