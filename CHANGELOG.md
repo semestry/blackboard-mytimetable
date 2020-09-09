@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.2.0 (30 July 2018)
+
+* Precompile JSP files for better Blackboard compatibility
+
 ## v2.1.8 (23 August 2017)
 
 * Fixed loading of configuration settings

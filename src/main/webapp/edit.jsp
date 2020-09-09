@@ -10,7 +10,6 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="/bbNG" prefix="bbNG" %>
-<%@taglib prefix="bbUI" uri="/bbUI" %>
 <%@taglib prefix="bbData" uri="/bbData" %>
 
 <bbNG:modulePage type="personalize">

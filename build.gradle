@@ -1,13 +1,27 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://maven.eveoh.nl/content/groups/public"
+        }
+    }
+
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
+    }
+}
+
+apply plugin: 'com.bmuschko.tomcat'
 apply plugin: 'war'
 
 group = 'nl.eveoh.mytimetable'
-version = '2.1.9-uol'
+version = '2.2.0-uol'
 
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 ext.jacksonVersion = '2.2.3'
-ext.blackboardVersion = '9.1.120113.0'
+ext.blackboardVersion = '3000.1.0-rel.52'
 ext.logbackVersion = '1.0.13'
 ext.slf4jVersion = '1.7.5'
 ext.guavaVersion = '16.0.1'
@@ -43,7 +57,23 @@ repositories {
     }
 }
 
+tomcat {
+    jasper {
+        validateTld = false
+        webXmlFragment = file("$webAppDir/WEB-INF/generated_web.xml")
+        addWebXmlMappings = true
+    }
+}
+
 dependencies {
+    def tomcatVersion = '8.5.0'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}",
+            "blackboard.platform:bb-taglibs:${blackboardVersion}",
+            "blackboard.platform:bb-platform:${blackboardVersion}",
+            "javax.servlet:jstl:1.2"
+
     providedCompile 'javax.servlet:servlet-api:2.5'
     providedCompile 'javax.servlet:jsp-api:2.0'
 
@@ -67,3 +97,17 @@ dependencies {
 
     providedCompile 'javax.servlet:jstl:1.2'
 }
+
+task compileJsps(type: JavaCompile) {
+    group = 'build'
+    description = 'Translates and compiles JSPs'
+    classpath = configurations.tomcat + sourceSets.main.output + sourceSets.main.runtimeClasspath
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    destinationDir = file("src/main/webapp/WEB-INF/classes")
+    source = file("build/jasper/org/apache/jsp")
+    dependsOn classes
+    dependsOn tomcatJasper
+}
+
+war.dependsOn compileJsps
