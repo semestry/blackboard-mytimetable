@@ -7,7 +7,7 @@
         <default-locale value="en_GB" />
         <version value="$version" />
         <requires>
-            <bbversion value="3000.1.0" />
+            <bbversion value="3700.14.0" />
         </requires>
 
         <vendor>
