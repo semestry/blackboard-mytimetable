@@ -5,9 +5,9 @@
         <handle value="mytimetable-b2" />
         <description value="b2.description" />
         <default-locale value="en_GB" />
-        <version value="$version" />
+        <version value="@version@" />
         <requires>
-            <bbversion value="3700.14.0" />
+            <bbversion value="3900.10.0" />
         </requires>
 
         <vendor>
@@ -47,8 +47,9 @@
             <permission type="java.util.logging.LoggingPermission" name="control" actions="" />
             <permission type="java.lang.RuntimePermission" name="db.connection.bb_bb60" actions="persist" />
             <permission type="java.lang.reflect.ReflectPermission" name="suppressAccessChecks" />
-            <permission type="java.util.PropertyPermission" name="*" actions="read,write" />
-            <permission type="java.io.FilePermission" name="&lt;&lt;ALL FILES&gt;&gt;" actions="read,write,delete" />
+            <permission type="java.util.PropertyPermission" name="*" actions="read" />
+            <permission type="java.io.FilePermission" name="${java.home}/-" actions="read"/>
+            <permission type="java.io.FilePermission" name="BB_HOME/-" actions="read,write,delete"/>
 
             <permission type="socket" name="*" actions="connect" />
 

@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 buildscript {
     repositories {
         maven {
@@ -27,17 +29,14 @@ ext.slf4jVersion = '1.7.5'
 ext.guavaVersion = '16.0.1'
 
 war {
-    // Replace version in Blackboard Manifest
-    inputs.property('version', archiveVersion)
-
     filesMatching("**/bb-manifest.xml") {
-        expand version: archiveVersion
+        filter(ReplaceTokens, tokens: [version: project.version])
     }
 
     manifest {
         attributes(
                 'Implementation-Title': 'MyTimetable Blackboard building block',
-                'Implementation-Version': archiveVersion,
+                'Implementation-Version': project.version,
                 'Implementation-Vendor': 'Eveoh',
                 'Provider': 'Gradle'
         )
