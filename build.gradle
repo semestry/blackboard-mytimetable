@@ -17,7 +17,7 @@ apply plugin: 'com.bmuschko.tomcat'
 apply plugin: 'war'
 
 group = 'nl.eveoh.mytimetable'
-version = '2.2.0'
+version = '3.0.0'
 
 sourceCompatibility = 11
 targetCompatibility = 11
