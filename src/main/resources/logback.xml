@@ -1,19 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <define name="pluginLogDir" class="nl.eveoh.mytimetable.blackboard.logging.BbPluginLogDirPropertyDefiner">
+        <vendorId>evh</vendorId>
+        <handle>mytimetable-b2</handle>
+    </define>
+
+    <appender name="default" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${pluginLogDir}/evh-mytimetable-b2.log</file>
         <prudent>true</prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>../../../../blackboard/logs/mytimetable-b2.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${pluginLogDir}/evh-mytimetable-b2.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
         </rollingPolicy>
 
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <!-- This pattern ensures logging will work in Learn SaaS -->
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} | %-5level | %-45(%L:%logger{40}) | %m%n%ex{10}</pattern>
         </encoder>
     </appender>
 
+    <logger name="nl.eveoh.mytimetable.blackboard.mytimetable-b2" level="debug" />
+
     <root level="warn">
-        <appender-ref ref="file"/>
+        <appender-ref ref="default"/>
     </root>
 
 </configuration>

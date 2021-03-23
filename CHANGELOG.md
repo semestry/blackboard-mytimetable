@@ -1,5 +1,12 @@
 # Changelog
 
+
+## v3.0.0 (23 March 2021)
+
+* Fix various warnings for Blackboard SaaS compatibility
+* Upgrade required Blackboard version to 3800.0.0
+* Require Java 11 compatibility
+
 ## v2.2.0 (30 July 2018)
 
 * Precompile JSP files for better Blackboard compatibility

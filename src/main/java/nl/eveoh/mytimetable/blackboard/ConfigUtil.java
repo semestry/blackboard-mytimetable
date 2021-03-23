@@ -17,7 +17,6 @@ package nl.eveoh.mytimetable.blackboard;
 
 import blackboard.data.navigation.NavigationItem;
 import blackboard.persist.navigation.NavigationItemDbLoader;
-import blackboard.platform.plugin.PlugInConfig;
 import blackboard.platform.plugin.PlugInUtil;
 import blackboard.platform.servlet.InlineReceiptUtil;
 import nl.eveoh.mytimetable.apiclient.configuration.Configuration;
@@ -42,7 +41,7 @@ public abstract class ConfigUtil {
     /**
      * Filename of the config file.
      */
-    private static String CONFIG_FILE = "config.properties";
+    private static final String CONFIG_FILE = "config.properties";
 
     private static final Logger log = LoggerFactory.getLogger(ConfigUtil.class);
 
@@ -72,12 +71,12 @@ public abstract class ConfigUtil {
         Properties properties = configuration.toProperties();
 
         try {
-            PlugInConfig pc = new PlugInConfig("evh", "mytimetable-b2");
+            File configDir = PlugInUtil.getConfigDirectory("evh", "mytimetable-b2");
 
             // Make sure the config directory exists
-            pc.getConfigDirectory().mkdirs();
+            configDir.mkdirs();
 
-            out = new BufferedWriter(new FileWriter(pc.getConfigDirectory().getAbsolutePath() + "/" + CONFIG_FILE));
+            out = new BufferedWriter(new FileWriter(configDir.getAbsolutePath() + "/" + CONFIG_FILE));
         } catch (Exception ex) {
             log.error("Could not open plugin configuration for saving", ex);
             return;
@@ -107,9 +106,9 @@ public abstract class ConfigUtil {
         Properties properties = new Properties();
 
         try {
-            PlugInConfig pc = new PlugInConfig("evh", "mytimetable-b2");
+            File configDir = PlugInUtil.getConfigDirectory("evh", "mytimetable-b2");
 
-            in = new BufferedReader(new FileReader(pc.getConfigDirectory().getAbsolutePath() + "/" + CONFIG_FILE));
+            in = new BufferedReader(new FileReader(configDir.getAbsolutePath() + "/" + CONFIG_FILE));
         } catch (Exception ex) {
             log.error("Could not open plugin configuration for loading", ex);
             return new WidgetConfiguration();
