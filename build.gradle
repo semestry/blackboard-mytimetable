@@ -1,20 +1,10 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
-buildscript {
-    repositories {
-        maven {
-            url "https://maven.eveoh.nl/content/groups/public"
-        }
-    }
-
-
-    dependencies {
-        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
-    }
+plugins {
+    id 'com.bmuschko.tomcat'
+    id 'nl.eveoh.gradle.verifications'
+    id 'war'
 }
-
-apply plugin: 'com.bmuschko.tomcat'
-apply plugin: 'war'
 
 group = 'nl.eveoh.mytimetable'
 version = '3.0.0'
@@ -48,12 +38,6 @@ war {
 configurations {
     // Exclude commons-logging dependency, the SLF4J bridge will take care of this
     all*.exclude group: 'commons-logging', module: 'commons-logging'
-}
-
-repositories {
-    maven {
-        url "https://maven.eveoh.nl/content/groups/public"
-    }
 }
 
 tomcat {
