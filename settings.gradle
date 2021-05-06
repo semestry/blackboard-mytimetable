@@ -1,8 +1,6 @@
 pluginManagement {
     repositories {
-        maven {
-            url "https://maven.eveoh.nl/content/groups/public"
-        }
+        gradlePluginPortal()
         maven {
             name 'eveohInternalGradlePlugins'
             credentials(PasswordCredentials)
@@ -17,13 +15,14 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositories {
-        maven {
-            url "https://maven.eveoh.nl/content/groups/public"
-        }
+        mavenCentral()
         maven {
             name 'eveohBlackboard'
             credentials(PasswordCredentials)
             url 'https://maven.eveoh.nl/repository/blackboard/'
+        }
+        maven {
+            url 'https://maven.eveoh.nl/repository/public/'
         }
     }
 }
