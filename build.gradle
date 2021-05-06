@@ -110,3 +110,7 @@ task compileJsps(type: JavaCompile) {
 }
 
 war.dependsOn compileJsps
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
+}
