@@ -1,1 +1,30 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven {
+            name 'eveohInternalGradlePlugins'
+            credentials(PasswordCredentials)
+            url 'https://maven.eveoh.nl/repository/internalgradleplugins/'
+        }
+    }
+    plugins {
+        id 'com.bmuschko.tomcat' version '2.2.5'
+        id 'nl.eveoh.gradle.verifications' version '0.0.1'
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        maven {
+            name 'eveohBlackboard'
+            credentials(PasswordCredentials)
+            url 'https://maven.eveoh.nl/repository/blackboard/'
+        }
+        maven {
+            url 'https://maven.eveoh.nl/repository/public/'
+        }
+    }
+}
+
 rootProject.name = 'blackboard-mytimetable'
